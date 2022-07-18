@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DestinationsViewController.swift
 //  DestinationGuide
 //
 //  Created by Alexandre Guibert1 on 02/08/2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var array: [Destination]!
     
@@ -92,6 +92,25 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         return headerView.systemLayoutSizeFitting(CGSize(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height),
                                                   withHorizontalFittingPriority: .required, // Width is fixed
                                                   verticalFittingPriority: .fittingSizeLevel) // Height can be as large as needed
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let desti = array[indexPath.item]
+        
+        DestinationFetchingService().getDestinationDetails(for: desti.id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(details):
+                    self.navigationController?.pushViewController(DestinationDetailsController(title: details.name, webviewUrl: details.url), animated: true)
+                case let .failure(error):
+                    let alert = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+                    
+                    self.present(alert, animated: true)
+                }
+            }
+            
+        }
     }
 }
 
