@@ -10,7 +10,7 @@ Lors de la restitution on s'intéressera **aux raisons de tes décisions et aux 
 
 Ce test comporte 2 parties. Une première partie de refactorisation du code existant. Dans la seconde tu vas devoir ajouter une fonctionnalité.
 
-Pour faire ce test, tu peux **forker ce repo** et faire l'implémentation de ton coté, tu nous enverras ensuite l'URL de ton repo ou un zip.
+Pour faire ce test, tu peux **forker ce repo** et faire l'implémentation de ton coté, tu nous enverras ensuite l'URL de ton repo.
 
 N'hésite pas à nous solliciter si tu as des questions.
 
