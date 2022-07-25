@@ -1,12 +1,17 @@
-### Introduction
-
-Dans ce test, tu vas reprendre du code. C'est une petite app qui comporte une vue qui affiche des destinations provenant d'une fake API qui ne fonctionne pas très bien ;). Lorsque l'utilisateur sélectionne une destination, une vue détail est présentée et elle contient une webview.
+## Introduction
+### Philosophie
 
 Chez Evaneos, nous accordons beaucoup d'importance à la **qualité du code et à la qualité de l'expérience utilisateur** de nos produits.
 
 Nous souhaitons à travers ce test **voir tes capacités en développement**. La maintenabilité et la clarté de ton code sont pour nous des éléments très important. N'hésite donc pas à faire attention aux détails et à être **rigoureux**.
 
 Lors de la restitution on s'intéressera **aux raisons de tes décisions et aux discussions que nous pourrons avoir autour**.
+### Le test
+
+Dans ce test, tu vas reprendre du code.
+
+Il s'agit d'une petite app qui comporte une vue qui affiche des destinations provenant d'une fake API qui ne fonctionne pas très bien ;)
+Lorsque l'utilisateur sélectionne une destination, une vue détail est présentée et elle contient une webview.
 
 Ce test comporte 2 parties. Une première partie de refactorisation du code existant. Dans la seconde tu vas devoir ajouter une fonctionnalité.
 
