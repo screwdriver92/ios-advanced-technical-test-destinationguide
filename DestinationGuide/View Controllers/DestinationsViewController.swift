@@ -92,12 +92,14 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         self.viewModel = viewModel
         
         viewModel.$array
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { _ in
                 self.reloadArray()
             })
             .store(in: &cancellables)
         
         viewModel.$selectedDestination
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { details in
                 if let details = details {
                     self.navigationController?.pushViewController(DestinationDetailsController(title: details.name, webviewUrl: details.url), animated: true)
@@ -106,6 +108,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
             .store(in: &cancellables)
         
         viewModel.$error
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { error in
                 if let error = error {
                     let alert = UIAlertController(title: viewModel.alertTitle(), message: error, preferredStyle: .alert)
@@ -176,9 +179,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     // MARK: - Helpers
     
     private func reloadArray() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+        self.collectionView.reloadData()
     }
 }
 
