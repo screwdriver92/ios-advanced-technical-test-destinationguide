@@ -24,6 +24,10 @@ class DestinationsViewModel {
     func numberOfItems() -> Int {
         array.count
     }
+    
+    func destination(for index: Int) -> Destination {
+        array[index]
+    }
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -77,7 +81,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let desti = viewModel.array[indexPath.item]
+        let desti = viewModel.destination(for: indexPath.item)
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as? DestinationCell {
             cell.setupCell(destination: desti)
             return cell
