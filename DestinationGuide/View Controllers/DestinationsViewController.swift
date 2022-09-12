@@ -10,6 +10,8 @@ import Combine
 
 class DestinationsViewModel {
     @Published var array = [Destination]()
+    @Published var selectedDestination: DestinationDetails?
+    @Published var error: String?
     
     init() {
         getDestinations()
@@ -18,6 +20,20 @@ class DestinationsViewModel {
     func getDestinations() {
         DestinationFetchingService().getDestinations { destinations in
             self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+        }
+    }
+    
+    func getDestinationDetails(with id: Destination.ID) {
+        DestinationFetchingService().getDestinationDetails(for: id) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(details):
+                    self.selectedDestination = details
+                case let .failure(error):
+                    self.error = error.localizedDescription
+                }
+            }
+            
         }
     }
     
@@ -78,6 +94,25 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
                 self.reloadArray()
             })
             .store(in: &cancellables)
+        
+        viewModel.$selectedDestination
+            .sink(receiveValue: { details in
+                if let details = details {
+                    self.navigationController?.pushViewController(DestinationDetailsController(title: details.name, webviewUrl: details.url), animated: true)
+                }
+            })
+            .store(in: &cancellables)
+        
+        viewModel.$error
+            .sink(receiveValue: { error in
+                if let error = error {
+                    let alert = UIAlertController(title: "Erreur", message: error, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+                    
+                    self.present(alert, animated: true)
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -124,20 +159,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let desti = viewModel.destination(for: indexPath.item)
         
-        DestinationFetchingService().getDestinationDetails(for: desti.id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(details):
-                    self.navigationController?.pushViewController(DestinationDetailsController(title: details.name, webviewUrl: details.url), animated: true)
-                case let .failure(error):
-                    let alert = UIAlertController(title: "Erreur", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
-                    
-                    self.present(alert, animated: true)
-                }
-            }
-            
-        }
+        viewModel.getDestinationDetails(with: desti.id)
     }
     
     // MARK: - Helpers
