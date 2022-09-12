@@ -28,6 +28,10 @@ class DestinationsViewModel {
     func destination(for index: Int) -> Destination {
         array[index]
     }
+    
+    func title() -> String {
+        "Toutes nos destinations"
+    }
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -96,7 +100,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
             
         case UICollectionView.elementKindSectionHeader:
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeader
-            headerView.titleLabel.text = "Toutes nos destinations"
+            headerView.titleLabel.text = viewModel.title()
             return headerView
             
         default:
