@@ -8,12 +8,12 @@
 import UIKit
 
 class DestinationsViewModel {
+    var array = [Destination]()
   
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    var array: [Destination]!
     var viewModel: DestinationsViewModel!
     
     lazy var collectionViewLayout: UICollectionViewLayout = {
@@ -51,7 +51,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         collectionView.dataSource = self
         
         DestinationFetchingService().getDestinations { destinations in
-            self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+            self.viewModel.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
             
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -60,15 +60,11 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if array != nil {
-            return array.count
-        }
-        
-        return 0
+        viewModel.array.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let desti = array[indexPath.item]
+        let desti = viewModel.array[indexPath.item]
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as? DestinationCell {
             cell.setupCell(destination: desti)
             return cell
@@ -105,7 +101,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let desti = array[indexPath.item]
+        let desti = viewModel.array[indexPath.item]
         
         DestinationFetchingService().getDestinationDetails(for: desti.id) { result in
             DispatchQueue.main.async {
