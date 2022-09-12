@@ -20,6 +20,10 @@ class DestinationsViewModel {
             self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
         }
     }
+    
+    func numberOfItems() -> Int {
+        array.count
+    }
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -69,7 +73,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.array.count
+        viewModel.numberOfItems()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
