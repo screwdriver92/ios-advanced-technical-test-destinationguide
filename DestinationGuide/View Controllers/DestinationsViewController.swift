@@ -63,9 +63,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         
         viewModel.$array
             .sink(receiveValue: { _ in
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
+                self.reloadArray()
             })
             .store(in: &cancellables)
     }
@@ -127,6 +125,14 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
                 }
             }
             
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    private func reloadArray() {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
         }
     }
 }
