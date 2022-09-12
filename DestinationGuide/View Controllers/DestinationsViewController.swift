@@ -6,15 +6,26 @@
 //
 
 import UIKit
+import Combine
 
 class DestinationsViewModel {
-    var array = [Destination]()
-  
+    @Published var array = [Destination]()
+    
+    init() {
+        getDestinations()
+    }
+    
+    func getDestinations() {
+        DestinationFetchingService().getDestinations { destinations in
+            self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+        }
+    }
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var viewModel: DestinationsViewModel!
+    var cancellables = Set<AnyCancellable>()
     
     lazy var collectionViewLayout: UICollectionViewLayout = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -50,13 +61,13 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         collectionView.frame = view.frame
         collectionView.dataSource = self
         
-        DestinationFetchingService().getDestinations { destinations in
-            self.viewModel.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
-            
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        viewModel.$array
+            .sink(receiveValue: { _ in
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            })
+            .store(in: &cancellables)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
