@@ -96,6 +96,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21F7018B28CFCB4A00EF6D98 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E710FAC42885AF2E00326EEF /* DestinationDetailsViewController.swift */,
+				E7AE6A8D26B81F4F0059FB12 /* DestinationsViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		E7878C1F26BACF3E00CF1DB8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,8 +160,7 @@
 			children = (
 				E7AE6A8926B81F4F0059FB12 /* AppDelegate.swift */,
 				E7AE6A8B26B81F4F0059FB12 /* SceneDelegate.swift */,
-				E7AE6A8D26B81F4F0059FB12 /* DestinationsViewController.swift */,
-				E710FAC42885AF2E00326EEF /* DestinationDetailsViewController.swift */,
+				21F7018B28CFCB4A00EF6D98 /* View Controllers */,
 				E7B8690A287C4701000D2C2C /* GradientView.swift */,
 				E7878C1C26BACE2400CF1DB8 /* Styles.swift */,
 				E7878C1F26BACF3E00CF1DB8 /* Fonts */,
