@@ -7,9 +7,14 @@
 
 import UIKit
 
+class DestinationsViewModel {
+  
+}
+
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     var array: [Destination]!
+    var viewModel: DestinationsViewModel!
     
     lazy var collectionViewLayout: UICollectionViewLayout = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -31,7 +36,12 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         
         return collectionView
     }()
-    
+  
+    convenience init(viewModel: DestinationsViewModel) {
+        self.init()
+        self.viewModel = viewModel
+    }
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
