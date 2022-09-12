@@ -48,6 +48,14 @@ class DestinationsViewModel {
     func title() -> String {
         "Toutes nos destinations"
     }
+    
+    func alertTitle() -> String{
+        "Erreur"
+    }
+    
+    func alertActionTitle() -> String {
+        "Annuler"
+    }
 }
 
 class DestinationsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -97,15 +105,15 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         viewModel.$error
             .sink(receiveValue: { error in
                 if let error = error {
-                    let alert = UIAlertController(title: "Erreur", message: error, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Annuler", style: .cancel))
+                    let alert = UIAlertController(title: viewModel.alertTitle(), message: error, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: viewModel.alertActionTitle(), style: .cancel))
                     
                     self.present(alert, animated: true)
                 }
             })
             .store(in: &cancellables)
     }
-        
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         
