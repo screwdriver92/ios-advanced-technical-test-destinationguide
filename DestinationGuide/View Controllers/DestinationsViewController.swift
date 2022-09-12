@@ -122,7 +122,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let desti = viewModel.array[indexPath.item]
+        let desti = viewModel.destination(for: indexPath.item)
         
         DestinationFetchingService().getDestinationDetails(for: desti.id) { result in
             DispatchQueue.main.async {
