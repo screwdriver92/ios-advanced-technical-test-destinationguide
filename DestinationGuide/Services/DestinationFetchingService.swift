@@ -76,5 +76,6 @@ fileprivate var destinationDetailsStub : Set<DestinationDetails> = [
     .init(id: "75", name: "Argentine", url: URL(string:"https://evaneos.fr/argentine")!),
     .init(id: "173", name: "Açores", url: URL(string:"https://evaneos.fr/acores")!),
     .init(id: "287", name: "Angleterre", url: URL(string:"https://evaneos.fr/angleterre")!),
-    .init(id: "107", name: "Bahamas", url: URL(string:"https://evaneos.fr/bahamas")!)
+    .init(id: "107", name: "Bahamas", url: URL(string:"https://evaneos.fr/bahamas")!),
+    .init(id: "170", name: "Albanie", url: URL(string:"https://evaneos.fr/albanie")!)
 ]
