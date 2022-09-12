@@ -13,18 +13,21 @@ class DestinationsViewModel {
     @Published var selectedDestination: DestinationDetails?
     @Published var error: String?
     
-    init() {
+    private var service: DestinationFetchingService
+    
+    init(service: DestinationFetchingService) {
+        self.service = service
         getDestinations()
     }
     
     func getDestinations() {
-        DestinationFetchingService().getDestinations { destinations in
+        service.getDestinations { destinations in
             self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
         }
     }
     
     func getDestinationDetails(with id: Destination.ID) {
-        DestinationFetchingService().getDestinationDetails(for: id) { result in
+        service.getDestinationDetails(for: id) { result in
             DispatchQueue.main.async {
                 switch result {
                 case let .success(details):
