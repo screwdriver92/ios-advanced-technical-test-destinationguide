@@ -79,15 +79,6 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     convenience init(viewModel: DestinationsViewModel) {
         self.init()
         self.viewModel = viewModel
-    }
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = .white
-        view.addSubview(collectionView)
-        collectionView.frame = view.frame
-        collectionView.dataSource = self
         
         viewModel.$array
             .sink(receiveValue: { _ in
@@ -113,6 +104,15 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
                 }
             })
             .store(in: &cancellables)
+    }
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+        view.addSubview(collectionView)
+        collectionView.frame = view.frame
+        collectionView.dataSource = self
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
