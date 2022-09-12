@@ -105,6 +105,14 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		21F7018C28CFCBBF00EF6D98 /* UIKit views */ = {
+			isa = PBXGroup;
+			children = (
+				E7B8690A287C4701000D2C2C /* GradientView.swift */,
+			);
+			path = "UIKit views";
+			sourceTree = "<group>";
+		};
 		E7878C1F26BACF3E00CF1DB8 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,7 +169,7 @@
 				E7AE6A8926B81F4F0059FB12 /* AppDelegate.swift */,
 				E7AE6A8B26B81F4F0059FB12 /* SceneDelegate.swift */,
 				21F7018B28CFCB4A00EF6D98 /* View Controllers */,
-				E7B8690A287C4701000D2C2C /* GradientView.swift */,
+				21F7018C28CFCBBF00EF6D98 /* UIKit views */,
 				E7878C1C26BACE2400CF1DB8 /* Styles.swift */,
 				E7878C1F26BACF3E00CF1DB8 /* Fonts */,
 				E794201826B853E50032C12E /* Models */,
