@@ -8,14 +8,21 @@
 import UIKit
 import WebKit
 
-class DestinationDetailsController: UIViewController {
-    
+class DestinationDetailsViewModel {
     let name: String
     let webviewUrl: URL
-    
+
     init(title: String, webviewUrl: URL) {
         self.name = title
         self.webviewUrl = webviewUrl
+    }
+}
+
+class DestinationDetailsController: UIViewController {
+    private let viewModel: DestinationDetailsViewModel
+    
+    init(viewModel: DestinationDetailsViewModel) {
+        self.viewModel = viewModel
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,7 +45,6 @@ class DestinationDetailsController: UIViewController {
         return spinner
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,9 +53,9 @@ class DestinationDetailsController: UIViewController {
         
         self.addView()
         
-        self.navigationItem.title = name
+        self.navigationItem.title = viewModel.name
         
-        let request = URLRequest(url: self.webviewUrl)
+        let request = URLRequest(url: self.viewModel.webviewUrl)
         self.webView.load(request)
         
     }

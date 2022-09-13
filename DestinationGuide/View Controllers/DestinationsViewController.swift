@@ -49,7 +49,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { details in
                 if let details = details {
-                    self.navigationController?.pushViewController(DestinationDetailsController(title: details.name, webviewUrl: details.url), animated: true)
+                    self.navigationController?.pushViewController(DestinationDetailsController(viewModel: .init(title: details.name, webviewUrl: details.url)), animated: true)
                 }
             })
             .store(in: &cancellables)
