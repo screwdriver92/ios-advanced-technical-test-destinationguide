@@ -8,20 +8,6 @@
 import UIKit
 import WebKit
 
-class DestinationDetailsViewModel {
-    let name: String
-    let webviewUrl: URL
-
-    init(title: String, webviewUrl: URL) {
-        self.name = title
-        self.webviewUrl = webviewUrl
-    }
-    
-    func request() -> URLRequest {
-        URLRequest(url: webviewUrl)
-    }
-}
-
 class DestinationDetailsController: UIViewController {
     private let viewModel: DestinationDetailsViewModel
     
