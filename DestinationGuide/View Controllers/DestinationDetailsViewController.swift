@@ -16,6 +16,10 @@ class DestinationDetailsViewModel {
         self.name = title
         self.webviewUrl = webviewUrl
     }
+    
+    func request() -> URLRequest {
+        URLRequest(url: webviewUrl)
+    }
 }
 
 class DestinationDetailsController: UIViewController {
@@ -55,9 +59,7 @@ class DestinationDetailsController: UIViewController {
         
         self.navigationItem.title = viewModel.name
         
-        let request = URLRequest(url: self.viewModel.webviewUrl)
-        self.webView.load(request)
-        
+        self.webView.load(viewModel.request())
     }
     
     //  MARK: - Functions
