@@ -7,12 +7,13 @@
 
 import XCTest
 @testable import DestinationGuide
+import SwiftUI
 
 //[✅] On init recent destinations section must be empty
 //[✅] On selection destination add it to the recent section
 //[✅] On selection destination persist it to the store
 //[✅] If at least 1 recent destination display the corresponding section
-//[ ] Maximum of 5 recent destinations
+//[✅] Maximum of 5 recent destinations
 //[ ] Insert the last selected destination to the leading
 //[ ] On recent destination selection push to the details view
 //[ ] On recent destination selection not persiste it
@@ -53,6 +54,17 @@ class DestinationsRecentsTests: XCTestCase {
         sut.selectedDestination = selectedDestination
         
         XCTAssertTrue(sut.isDisplayRecentSection(), "Expected to display the recent section after a destination selection")
+    }
+    
+    func test_selectedDestination_maximumOfFiveRecentsDestinations() {
+        let selectedDestination = anyDestination()
+        let (sut, _) = makeSUT()
+        
+        (1...6).forEach { _ in
+            sut.selectedDestination = selectedDestination
+        }
+        
+        XCTAssertEqual(sut.recentsDestinations.count, 5)
     }
 
         

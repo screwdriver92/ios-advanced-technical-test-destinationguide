@@ -70,6 +70,9 @@ class DestinationsViewModel: ObservableObject {
     // MARK: - Helpers
     private func addToRecentSection(_ destination: Destination?) {
         if let destination = destination {
+            if recentsDestinations.count >= 5 {
+                _ = recentsDestinations.popLast()
+            }
             recentsDestinations.append(destination)
         }
     }
