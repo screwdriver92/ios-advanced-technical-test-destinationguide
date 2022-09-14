@@ -34,7 +34,7 @@ class DestinationFetchingService : DestinationFetchingServiceProtocol {
     }
 }
 
-fileprivate var destinationsStub : Set<Destination> = [
+var destinationsStub : Set<Destination> = [
     .init(id: "217", name: "Barbade", picture: URL(string:"https://static1.evcdn.net/images/reduction/1027399_w-800_h-800_q-70_m-crop.jpg")!, tag: "Incontournable", rating: 5),
     .init(id: "50", name: "Arménie", picture: URL(string:"https://static1.evcdn.net/images/reduction/1544481_w-800_h-800_q-70_m-crop.jpg")!, tag: "Incontournable", rating: 4),
     .init(id: "6", name: "Allemagne", picture: URL(string:"https://static1.evcdn.net/images/reduction/1027397_w-800_h-800_q-70_m-crop.jpg")!, tag: "Incontournable", rating: 5),
@@ -57,7 +57,7 @@ fileprivate var destinationsStub : Set<Destination> = [
     .init(id: "107", name: "Bahamas", picture: URL(string:"https://static1.evcdn.net/images/reduction/39034_w-800_h-800_q-70_m-crop.jpg")!, tag: "Incontournable", rating: 5)
 ]
 
-fileprivate var destinationDetailsStub : Set<DestinationDetails> = [
+var destinationDetailsStub : Set<DestinationDetails> = [
     .init(id: "217", name: "Barbade", url: URL(string:"https://evaneos.fr/barbade")!),
     .init(id: "50", name: "Arménie", url: URL(string:"https://evaneos.fr/armenie")!),
     .init(id: "6", name: "Allemagne", url: URL(string:"https://evaneos.fr/allemagne")!),

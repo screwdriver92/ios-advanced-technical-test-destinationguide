@@ -38,7 +38,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         self.init()
         self.viewModel = viewModel
         
-        viewModel.$array
+        viewModel.$destinations
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { _ in
                 self.reloadArray()

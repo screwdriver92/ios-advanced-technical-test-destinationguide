@@ -7,8 +7,8 @@
 
 import Foundation
 
-class DestinationsViewModel {
-    @Published var array = [Destination]()
+class DestinationsViewModel: ObservableObject {
+    @Published var destinations = [Destination]()
     @Published var selectedDestination: DestinationDetails?
     @Published var error: String?
     
@@ -21,7 +21,7 @@ class DestinationsViewModel {
     
     func getDestinations() {
         service.getDestinations { destinations in
-            self.array = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+            self.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
         }
     }
     
@@ -40,11 +40,11 @@ class DestinationsViewModel {
     }
     
     func numberOfItems() -> Int {
-        array.count
+        destinations.count
     }
     
     func destination(for index: Int) -> Destination {
-        array[index]
+        destinations[index]
     }
     
     func title() -> String {
