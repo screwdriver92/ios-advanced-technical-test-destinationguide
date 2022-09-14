@@ -11,7 +11,7 @@ import XCTest
 //[✅] On init recent destinations section must be empty
 //[✅] On selection destination add it to the recent section
 //[✅] On selection destination persist it to the store
-//[ ] If at least 1 recent destination display the section
+//[✅] If at least 1 recent destination display the corresponding section
 //[ ] Maximum of 5 recent destinations
 //[ ] Insert the last selected destination to the leading
 //[ ] On recent destination selection push to the details view
@@ -42,6 +42,17 @@ class DestinationsRecentsTests: XCTestCase {
         sut.selectedDestination = selectedDestination
         
         XCTAssertEqual(store.messages, [.add(selectedDestination)])
+    }
+    
+    func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
+        let selectedDestination = anyDestination()
+        let (sut, _) = makeSUT()
+        
+        XCTAssertFalse(sut.isDisplayRecentSection(), "Precondition - the section is hidden, no destination has been selected yet")
+        
+        sut.selectedDestination = selectedDestination
+        
+        XCTAssertTrue(sut.isDisplayRecentSection(), "Expected to display the recent section after a destination selection")
     }
 
         

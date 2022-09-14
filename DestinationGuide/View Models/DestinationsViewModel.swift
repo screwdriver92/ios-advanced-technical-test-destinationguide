@@ -48,6 +48,10 @@ class DestinationsViewModel: ObservableObject {
     func title() -> String {
         "Toutes nos destinations"
     }
+    
+    func isDisplayRecentSection() -> Bool {
+        !recentsDestinations.isEmpty
+    }
         
 //    func getDestinationDetails(with id: Destination.ID) {
 //        service.getDestinationDetails(for: id) { result in
