@@ -9,6 +9,7 @@ import Foundation
 
 class DestinationsViewModel: ObservableObject {
     @Published var destinations = [Destination]()
+    @Published var recentsDestinations = [Destination]()
     @Published var selectedDestination: DestinationDetails?
     @Published var error: String?
     

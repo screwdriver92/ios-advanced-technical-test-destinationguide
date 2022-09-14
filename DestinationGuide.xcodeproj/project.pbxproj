@@ -29,7 +29,7 @@
 		E7AE6A8E26B81F4F0059FB12 /* DestinationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE6A8D26B81F4F0059FB12 /* DestinationsViewController.swift */; };
 		E7AE6A9326B81F510059FB12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7AE6A9226B81F510059FB12 /* Assets.xcassets */; };
 		E7AE6A9626B81F510059FB12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7AE6A9426B81F510059FB12 /* LaunchScreen.storyboard */; };
-		E7AE6AA126B81F520059FB12 /* DestinationGuideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE6AA026B81F520059FB12 /* DestinationGuideTests.swift */; };
+		E7AE6AA126B81F520059FB12 /* DestinationsRecentsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7AE6AA026B81F520059FB12 /* DestinationsRecentsTests.swift */; };
 		E7B8690B287C4701000D2C2C /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B8690A287C4701000D2C2C /* GradientView.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +69,7 @@
 		E7AE6A9526B81F510059FB12 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7AE6A9726B81F510059FB12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7AE6A9C26B81F520059FB12 /* DestinationGuideTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DestinationGuideTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7AE6AA026B81F520059FB12 /* DestinationGuideTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationGuideTests.swift; sourceTree = "<group>"; };
+		E7AE6AA026B81F520059FB12 /* DestinationsRecentsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsRecentsTests.swift; sourceTree = "<group>"; };
 		E7B8690A287C4701000D2C2C /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -223,7 +223,7 @@
 		E7AE6A9F26B81F520059FB12 /* DestinationGuideTests */ = {
 			isa = PBXGroup;
 			children = (
-				E7AE6AA026B81F520059FB12 /* DestinationGuideTests.swift */,
+				E7AE6AA026B81F520059FB12 /* DestinationsRecentsTests.swift */,
 			);
 			path = DestinationGuideTests;
 			sourceTree = "<group>";
@@ -356,7 +356,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7AE6AA126B81F520059FB12 /* DestinationGuideTests.swift in Sources */,
+				E7AE6AA126B81F520059FB12 /* DestinationsRecentsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
