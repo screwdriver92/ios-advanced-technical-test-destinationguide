@@ -26,17 +26,21 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_addDestinationToRecentsSection() {
-        let anyDestination = Destination(id: "1", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+        let selectedDestination = anyDestination()
         let sut = makeSUT()
         
-        sut.selectedDestination = anyDestination
+        sut.selectedDestination = selectedDestination
         
-        XCTAssertEqual(sut.recentsDestinations, [anyDestination])
+        XCTAssertEqual(sut.recentsDestinations, [selectedDestination])
     }
-    
+        
     // MARK: Helpers
     
     private func makeSUT() -> DestinationsViewModel {
         DestinationsViewModel(service: DestinationFetchingService())
+    }
+    
+    private func anyDestination() -> Destination {
+        Destination(id: "1", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
     }
 }
