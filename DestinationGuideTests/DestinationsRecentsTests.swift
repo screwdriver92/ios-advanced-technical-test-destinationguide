@@ -10,34 +10,47 @@ import XCTest
 
 //[✅] On init recent destinations section must be empty
 //[✅] On selection destination add it to the recent section
-//[ ] On selection destination persist it
+//[✅] On selection destination persist it to the store
 //[ ] If at least 1 recent destination display the section
 //[ ] Maximum of 5 recent destinations
 //[ ] Insert the last selected destination to the leading
 //[ ] On recent destination selection push to the details view
 //[ ] On recent destination selection not persiste it
 
+
 class DestinationsRecentsTests: XCTestCase {
     
     func test_init_recentsDestinationsIsEmpty() {
-        let sut = makeSUT()
+        let (sut, _) = makeSUT()
         
         XCTAssertTrue(sut.recentsDestinations.isEmpty)
     }
     
     func test_selectedDestination_addDestinationToRecentsSection() {
         let selectedDestination = anyDestination()
-        let sut = makeSUT()
+        let (sut, _) = makeSUT()
         
         sut.selectedDestination = selectedDestination
         
         XCTAssertEqual(sut.recentsDestinations, [selectedDestination])
     }
+    
+    func test_selectedDestination_persistDestinationToTheStore() {
+        let selectedDestination = anyDestination()
+        let (sut, store) = makeSUT()
+        
+        sut.selectedDestination = selectedDestination
+        
+        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+    }
+
         
     // MARK: Helpers
     
-    private func makeSUT() -> DestinationsViewModel {
-        DestinationsViewModel(service: DestinationFetchingService())
+    private func makeSUT() -> (sut: DestinationsViewModel, store: DestinationStore) {
+        let store = DestinationStore()
+        let sut = DestinationsViewModel(service: DestinationFetchingService(), store: store)
+        return (sut, store)
     }
     
     private func anyDestination() -> Destination {

@@ -27,7 +27,7 @@ struct DestinationsView: View {
 
 struct DestinationsView_Previews: PreviewProvider {
   static var previews: some View {
-    DestinationsView(viewModel: DestinationsViewModel(service: DestinationFetchingService()))
+      DestinationsView(viewModel: DestinationsViewModel(service: DestinationFetchingService(), store: DestinationStore()))
   }
 }
 

@@ -17,7 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             let destinationService = DestinationFetchingService()
-            let destinationViewModel = DestinationsViewModel(service: destinationService)
+            let destinationStore = DestinationStore()
+            let destinationViewModel = DestinationsViewModel(service: destinationService, store: destinationStore)
             let destinationViewController = DestinationsViewController(viewModel: destinationViewModel)
             window.rootViewController = UINavigationController(rootViewController: destinationViewController)
             self.window = window

@@ -7,18 +7,35 @@
 
 import Foundation
 
+class DestinationStore {
+    enum Message: Equatable {
+        case add(Destination)
+    }
+    
+    private(set) var messages = [Message]()
+    
+    func add(_ destination: Destination) {
+        messages.append(.add(destination))
+    }
+}
+
 class DestinationsViewModel: ObservableObject {
     @Published var destinations = [Destination]()
     @Published var recentsDestinations = [Destination]()
     @Published var selectedDestination: Destination? {
-        didSet { addToRecentSection(selectedDestination) }
+        didSet {
+            addToRecentSection(selectedDestination)
+            persistToStore(selectedDestination)
+        }
     }
     @Published var error: String?
     
     private var service: DestinationFetchingService
+    private var store: DestinationStore
     
-    init(service: DestinationFetchingService) {
+    init(service: DestinationFetchingService, store: DestinationStore) {
         self.service = service
+        self.store = store
         getDestinations()
     }
     
@@ -50,6 +67,12 @@ class DestinationsViewModel: ObservableObject {
     private func addToRecentSection(_ destination: Destination?) {
         if let destination = destination {
             recentsDestinations.append(destination)
+        }
+    }
+    
+    private func persistToStore(_ destination: Destination?) {
+        if let destination = destination {
+            store.add(destination)
         }
     }
     
