@@ -10,7 +10,9 @@ import Foundation
 class DestinationsViewModel: ObservableObject {
     @Published var destinations = [Destination]()
     @Published var recentsDestinations = [Destination]()
-    @Published var selectedDestination: DestinationDetails?
+    @Published var selectedDestination: Destination? {
+        didSet { addToRecentSection(selectedDestination) }
+    }
     @Published var error: String?
     
     private var service: DestinationFetchingService
@@ -26,19 +28,32 @@ class DestinationsViewModel: ObservableObject {
         }
     }
     
-    func getDestinationDetails(with id: Destination.ID) {
-        service.getDestinationDetails(for: id) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(details):
-                    self.selectedDestination = details
-                case let .failure(error):
-                    self.error = error.localizedDescription
-                }
-            }
-            
+    func title() -> String {
+        "Toutes nos destinations"
+    }
+        
+//    func getDestinationDetails(with id: Destination.ID) {
+//        service.getDestinationDetails(for: id) { result in
+//            DispatchQueue.main.async {
+//                switch result {
+//                case let .success(details):
+//                    self.selectedDestination = details
+//                case let .failure(error):
+//                    self.error = error.localizedDescription
+//                }
+//            }
+//
+//        }
+//    }
+
+    // MARK: - Helpers
+    private func addToRecentSection(_ destination: Destination?) {
+        if let destination = destination {
+            recentsDestinations.append(destination)
         }
     }
+    
+    // UIKT
     
     func numberOfItems() -> Int {
         destinations.count
@@ -46,10 +61,6 @@ class DestinationsViewModel: ObservableObject {
     
     func destination(for index: Int) -> Destination {
         destinations[index]
-    }
-    
-    func title() -> String {
-        "Toutes nos destinations"
     }
     
     func alertTitle() -> String{

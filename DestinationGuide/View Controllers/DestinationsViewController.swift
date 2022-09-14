@@ -48,9 +48,9 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
         viewModel.$selectedDestination
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { details in
-                if let details = details {
-                    self.navigationController?.pushViewController(DestinationDetailsController(viewModel: .init(title: details.name, webviewUrl: details.url)), animated: true)
-                }
+//                if let details = details {
+//                    self.navigationController?.pushViewController(DestinationDetailsController(viewModel: .init(title: details.name, webviewUrl: details.url)), animated: true)
+//                }
             })
             .store(in: &cancellables)
         
@@ -120,7 +120,7 @@ class DestinationsViewController: UIViewController, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let desti = viewModel.destination(for: indexPath.item)
         
-        viewModel.getDestinationDetails(with: desti.id)
+//        viewModel.getDestinationDetails(with: desti.id)
     }
     
     // MARK: - Helpers
