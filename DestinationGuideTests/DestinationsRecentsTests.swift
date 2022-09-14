@@ -20,11 +20,14 @@ import XCTest
 class DestinationsRecentsTests: XCTestCase {
     
     func test_init_recentsDestinationsIsEmpty() {
-        let sut = DestinationsViewModel(service: DestinationFetchingService())
+        let sut = makeSUT()
         
         XCTAssertTrue(sut.recentsDestinations.isEmpty)
     }
     
+    // MARK: Helpers
     
-    
+    private func makeSUT() -> DestinationsViewModel {
+        DestinationsViewModel(service: DestinationFetchingService())
+    }
 }
