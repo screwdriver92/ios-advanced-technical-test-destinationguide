@@ -73,7 +73,7 @@ class DestinationsViewModel: ObservableObject {
             if recentsDestinations.count >= 5 {
                 _ = recentsDestinations.popLast()
             }
-            recentsDestinations.append(destination)
+            recentsDestinations.insert(destination, at: 0)
         }
     }
     

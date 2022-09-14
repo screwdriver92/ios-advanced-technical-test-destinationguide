@@ -14,7 +14,7 @@ import SwiftUI
 //[✅] On selection destination persist it to the store
 //[✅] If at least 1 recent destination display the corresponding section
 //[✅] Maximum of 5 recent destinations
-//[ ] Insert the last selected destination to the leading
+//[✅] Insert the last selected destination as the first element
 //[ ] On recent destination selection push to the details view
 //[ ] On recent destination selection not persiste it
 
@@ -28,7 +28,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_addDestinationToRecentsSection() {
-        let selectedDestination = anyDestination()
+        let selectedDestination = anyDestination1()
         let (sut, _) = makeSUT()
         
         sut.selectedDestination = selectedDestination
@@ -37,7 +37,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_persistDestinationToTheStore() {
-        let selectedDestination = anyDestination()
+        let selectedDestination = anyDestination1()
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
@@ -46,7 +46,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
-        let selectedDestination = anyDestination()
+        let selectedDestination = anyDestination1()
         let (sut, _) = makeSUT()
         
         XCTAssertFalse(sut.isDisplayRecentSection(), "Precondition - the section is hidden, no destination has been selected yet")
@@ -57,7 +57,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_maximumOfFiveRecentsDestinations() {
-        let selectedDestination = anyDestination()
+        let selectedDestination = anyDestination1()
         let (sut, _) = makeSUT()
         
         (1...6).forEach { _ in
@@ -65,6 +65,17 @@ class DestinationsRecentsTests: XCTestCase {
         }
         
         XCTAssertEqual(sut.recentsDestinations.count, 5)
+    }
+    
+    func test_selectedDestination_insertLastSelectedDestinationaAsTheFirstElement() {
+        let selectedDestination = anyDestination1()
+        let lastSelectedDestination = anyDestination2()
+        let (sut, _) = makeSUT()
+        
+        sut.selectedDestination = selectedDestination
+        sut.selectedDestination = lastSelectedDestination
+        
+        XCTAssertEqual(sut.recentsDestinations, [lastSelectedDestination, selectedDestination])
     }
 
         
@@ -76,7 +87,11 @@ class DestinationsRecentsTests: XCTestCase {
         return (sut, store)
     }
     
-    private func anyDestination() -> Destination {
+    private func anyDestination1() -> Destination {
         Destination(id: "1", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private func anyDestination2() -> Destination {
+        Destination(id: "2", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
     }
 }
