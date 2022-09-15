@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Destination : Hashable, Identifiable {
+struct Destination : Hashable, Identifiable, Codable {
     let id: String
     let name: String
     let picture: URL
