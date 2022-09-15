@@ -19,7 +19,6 @@ import SwiftUI
 //[✅] On already selected destination not add it to the recent section
 //[✅] On already selected destination not persist it in store
 
-
 class DestinationsRecentsTests: XCTestCase {
     
     func test_init_recentsDestinationsIsEmpty() {
@@ -43,7 +42,7 @@ class DestinationsRecentsTests: XCTestCase {
         
         sut.selectedDestination = selectedDestination
         
-        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+        XCTAssertEqual(store.messages, [.update([selectedDestination])])
     }
     
     func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
@@ -108,10 +107,10 @@ class DestinationsRecentsTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.add(selectedDestination)], "Expected that the recent destination has been persist to the store on destination selection")
+        XCTAssertEqual(store.messages, [.update([selectedDestination])], "Expected that the recent destination has been persist to the store on destination selection")
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.add(selectedDestination)], "Expected that the recent destination was not persist, double are not allowed")
+        XCTAssertEqual(store.messages, [.update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
     }
 
     // MARK: Helpers

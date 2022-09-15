@@ -9,22 +9,23 @@ import Foundation
 
 class DestinationStore {
     enum Message: Equatable {
-        case add(Destination)
+        case update([Destination])
     }
     
     private(set) var messages = [Message]()
     
-    func add(_ destination: Destination) {
-        messages.append(.add(destination))
+    func update(with destinations: [Destination]) {
+        messages.append(.update(destinations))
     }
 }
 
 class DestinationsViewModel: ObservableObject {
     @Published var destinations = [Destination]()
-    @Published var recentsDestinations = [Destination]()
+    @Published var recentsDestinations = [Destination]() {
+        didSet { persistToStore(recentsDestinations) }
+    }
     @Published var selectedDestination: Destination? {
         didSet {
-            persistToStore(selectedDestination)
             addToRecentSection(selectedDestination)
             displayDetailsViewIfNeeded()
         }
@@ -85,11 +86,11 @@ class DestinationsViewModel: ObservableObject {
         }
     }
     
-    private func persistToStore(_ destination: Destination?) {
-        if let destination = destination {
-            guard !recentsDestinations.contains(destination) else { return }
-            store.add(destination)
-        }
+    private func persistToStore(_ destinations: [Destination]) {
+//        if let destination = destination {
+//            guard !recentsDestinations.contains(destination) else { return }
+        store.update(with: destinations)
+//        }
     }
     
     // UIKT
