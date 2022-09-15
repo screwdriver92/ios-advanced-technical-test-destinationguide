@@ -29,7 +29,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_addDestinationToRecentsSection() {
-        let selectedDestination = anyDestination1()
+        let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
         sut.selectedDestination = selectedDestination
@@ -38,7 +38,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_persistDestinationToTheStore() {
-        let selectedDestination = anyDestination1()
+        let selectedDestination = anyDestination(id: "1")
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
@@ -47,7 +47,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
-        let selectedDestination = anyDestination1()
+        let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
         XCTAssertFalse(sut.isDisplayRecentSection(), "Precondition - the section is hidden, no destination has been selected yet")
@@ -60,19 +60,19 @@ class DestinationsRecentsTests: XCTestCase {
     func test_selectedDestination_maximumOfFiveRecentsDestinations() {
         let (sut, _) = makeSUT()
         
-        sut.selectedDestination = anyDestination1()
-        sut.selectedDestination = anyDestination2()
-        sut.selectedDestination = anyDestination3()
-        sut.selectedDestination = anyDestination4()
-        sut.selectedDestination = anyDestination5()
-        sut.selectedDestination = anyDestination6()
+        sut.selectedDestination = anyDestination(id: "1")
+        sut.selectedDestination = anyDestination(id: "2")
+        sut.selectedDestination = anyDestination(id: "3")
+        sut.selectedDestination = anyDestination(id: "4")
+        sut.selectedDestination = anyDestination(id: "5")
+        sut.selectedDestination = anyDestination(id: "6")
         
         XCTAssertEqual(sut.recentsDestinations.count, 5)
     }
     
     func test_selectedDestination_insertLastSelectedDestinationaAsTheFirstElement() {
-        let selectedDestination = anyDestination1()
-        let lastSelectedDestination = anyDestination2()
+        let selectedDestination = anyDestination(id: "1")
+        let lastSelectedDestination = anyDestination(id: "2")
         let (sut, _) = makeSUT()
         
         sut.selectedDestination = selectedDestination
@@ -82,7 +82,7 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_displayDestinationDetailsView() {
-        let selectedDestination = anyDestination1()
+        let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
         XCTAssertFalse(sut.isDisplayDetailsView, "Precondition - the selected destination is nil on init, nothing to display")
@@ -100,27 +100,7 @@ class DestinationsRecentsTests: XCTestCase {
         return (sut, store)
     }
     
-    private func anyDestination1() -> Destination {
-        Destination(id: "1", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
-    }
-    
-    private func anyDestination2() -> Destination {
-        Destination(id: "2", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
-    }
-    
-    private func anyDestination3() -> Destination {
-        Destination(id: "3", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
-    }
-    
-    private func anyDestination4() -> Destination {
-        Destination(id: "4", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
-    }
-    
-    private func anyDestination5() -> Destination {
-        Destination(id: "5", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
-    }
-    
-    private func anyDestination6() -> Destination {
-        Destination(id: "6", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    private func anyDestination(id: String) -> Destination {
+        Destination(id: id, name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
     }
 }
