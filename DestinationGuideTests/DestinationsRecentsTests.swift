@@ -58,12 +58,14 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_maximumOfFiveRecentsDestinations() {
-        let selectedDestination = anyDestination1()
         let (sut, _) = makeSUT()
         
-        (1...6).forEach { _ in
-            sut.selectedDestination = selectedDestination
-        }
+        sut.selectedDestination = anyDestination1()
+        sut.selectedDestination = anyDestination2()
+        sut.selectedDestination = anyDestination3()
+        sut.selectedDestination = anyDestination4()
+        sut.selectedDestination = anyDestination5()
+        sut.selectedDestination = anyDestination6()
         
         XCTAssertEqual(sut.recentsDestinations.count, 5)
     }
@@ -104,5 +106,21 @@ class DestinationsRecentsTests: XCTestCase {
     
     private func anyDestination2() -> Destination {
         Destination(id: "2", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private func anyDestination3() -> Destination {
+        Destination(id: "3", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private func anyDestination4() -> Destination {
+        Destination(id: "4", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private func anyDestination5() -> Destination {
+        Destination(id: "5", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private func anyDestination6() -> Destination {
+        Destination(id: "6", name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
     }
 }
