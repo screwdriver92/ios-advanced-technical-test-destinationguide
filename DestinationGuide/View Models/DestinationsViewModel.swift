@@ -7,24 +7,8 @@
 
 import Foundation
 
-class DestinationStore {
-    enum Message: Equatable {
-        case update([Destination])
-        case deleteAll
-    }
-    
-    private(set) var messages = [Message]()
-    
-    func update(with destinations: [Destination]) {
-        deleteAll()
-        messages.append(.update(destinations))
-    }
-    
-    // MARK: - Helpers
-    
-    private func deleteAll() {
-        messages.append(.deleteAll)
-    }
+protocol DestinationStore {
+    func update(with destinations: [Destination])
 }
 
 class DestinationsViewModel: ObservableObject {

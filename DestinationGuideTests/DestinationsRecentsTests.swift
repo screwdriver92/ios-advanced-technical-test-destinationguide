@@ -113,13 +113,33 @@ class DestinationsRecentsTests: XCTestCase {
     
     // MARK: Helpers
     
-    private func makeSUT() -> (sut: DestinationsViewModel, store: DestinationStore) {
-        let store = DestinationStore()
+    private func makeSUT() -> (sut: DestinationsViewModel, store: DestinationStoreSpy) {
+        let store = DestinationStoreSpy()
         let sut = DestinationsViewModel(service: DestinationFetchingService(), store: store)
         return (sut, store)
     }
     
     private func anyDestination(id: String) -> Destination {
         Destination(id: id, name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
+    }
+    
+    private class DestinationStoreSpy: DestinationStore {
+        enum Message: Equatable {
+            case update([Destination])
+            case deleteAll
+        }
+        
+        private(set) var messages = [Message]()
+        
+        func update(with destinations: [Destination]) {
+            deleteAll()
+            messages.append(.update(destinations))
+        }
+        
+        // MARK: - Helpers
+        
+        private func deleteAll() {
+            messages.append(.deleteAll)
+        }
     }
 }
