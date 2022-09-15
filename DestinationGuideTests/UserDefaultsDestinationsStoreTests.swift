@@ -21,7 +21,7 @@ class UserDefaultsDestinationStore {
 
 class UserDefaultsDestinationsStoreTests: XCTestCase {
 
-  func test_getDestinations_persistDestinations() {
+  func test_init_storeIsEmpty() {
     let sut = makeSUT()
     
     let destinations = sut.getDestinations()
