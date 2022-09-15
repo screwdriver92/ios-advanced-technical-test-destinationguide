@@ -77,6 +77,7 @@ class DestinationsViewModel: ObservableObject {
     
     private func addToRecentSection(_ destination: Destination?) {
         if let destination = destination {
+            guard !recentsDestinations.contains(destination) else { return }
             if recentsDestinations.count >= 5 {
                 _ = recentsDestinations.popLast()
             }

@@ -16,8 +16,8 @@ import SwiftUI
 //[✅] Maximum of 5 recent destinations
 //[✅] Insert the last selected destination as the first element
 //[✅] On recent destination selection push to the details view
-//[ ] On recent destination selection not add it to the recent section
-//[ ] On recent destination selection not persist it in store
+//[✅] On already selected destination not add it to the recent section
+//[ ] On already selected destination not persist it in store
 
 
 class DestinationsRecentsTests: XCTestCase {
@@ -90,6 +90,17 @@ class DestinationsRecentsTests: XCTestCase {
         sut.selectedDestination = selectedDestination
         
         XCTAssertTrue(sut.isDisplayDetailsView, "Expected to display destination details view on destination selection")
+    }
+    
+    func test_selectedDestination_doesNotAddToRecentDestinationAlreadySelectedDestination() {
+        let selectedDestination = anyDestination(id: "1")
+        let (sut, _) = makeSUT()
+                
+        sut.selectedDestination = selectedDestination
+        XCTAssertEqual(sut.recentsDestinations, [selectedDestination], "Expected that the recent destination has been added to the recent section on destination selection")
+        
+        sut.selectedDestination = selectedDestination
+        XCTAssertEqual(sut.recentsDestinations, [selectedDestination], "Expected that the recent destination was not be added, double are not allowed")
     }
         
     // MARK: Helpers
