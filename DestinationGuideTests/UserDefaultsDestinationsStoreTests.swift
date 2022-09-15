@@ -10,7 +10,7 @@ import XCTest
 
 //[✅] On init the store is empty
 //[✅] Update add all destination to the store
-//[ ] Delete the store remove all persisted destination
+//[✅] Delete the store remove all persisted destination
 //[ ] Get destination in the right order
 
 class UserDefaultsDestinationStore: DestinationStore {
@@ -64,6 +64,17 @@ class UserDefaultsDestinationsStoreTests: XCTestCase {
     let destinations = sut.getDestinations()
     
     XCTAssertEqual(destinations, expectedDestinations)
+  }
+  
+  func test_deleteDestination_deleteAllDestinationsFromTheStore() {
+    let destinations = [anyDestination(id: "1")]
+    let sut = makeSUT()
+    
+    sut.update(with: destinations)
+    sut.deleteDestination()
+    let storeDestinations = sut.getDestinations()
+    
+    XCTAssertTrue(storeDestinations.isEmpty)
   }
   
   // MARK: - Helpers
