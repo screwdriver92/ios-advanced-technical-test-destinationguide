@@ -18,6 +18,7 @@ import SwiftUI
 //[✅] On recent destination selection push to the details view
 //[✅] On already selected destination not add it to the recent section
 //[✅] On already selected destination not persist it in store
+//[✅] On store update, all destinations must be deleted before
 
 class DestinationsRecentsTests: XCTestCase {
     
@@ -42,7 +43,7 @@ class DestinationsRecentsTests: XCTestCase {
         
         sut.selectedDestination = selectedDestination
         
-        XCTAssertEqual(store.messages, [.update([selectedDestination])])
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])])
     }
     
     func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
@@ -107,12 +108,12 @@ class DestinationsRecentsTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.update([selectedDestination])], "Expected that the recent destination has been persist to the store on destination selection")
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])], "Expected that the recent destination has been persist to the store on destination selection")
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
     }
-
+    
     // MARK: Helpers
     
     private func makeSUT() -> (sut: DestinationsViewModel, store: DestinationStore) {
