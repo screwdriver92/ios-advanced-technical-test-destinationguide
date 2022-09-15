@@ -11,7 +11,7 @@ import XCTest
 //[✅] On init the store is empty
 //[✅] Update add all destination to the store
 //[✅] Delete the store remove all persisted destination
-//[ ] Get destination in the right order
+//[✅] Get destination in the right order
 
 class UserDefaultsDestinationStore: DestinationStore {
   private let recentsDestinationsKey = "recentsDestinations"
