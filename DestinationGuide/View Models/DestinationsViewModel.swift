@@ -9,6 +9,7 @@ import Foundation
 
 protocol DestinationStore {
     func update(with destinations: [Destination])
+    func getDestinations() -> [Destination] 
 }
 
 class DestinationsViewModel: ObservableObject {
@@ -32,6 +33,7 @@ class DestinationsViewModel: ObservableObject {
         self.service = service
         self.store = store
         getDestinations()
+        recentsDestinations = store.getDestinations()
     }
     
     func getDestinations() {

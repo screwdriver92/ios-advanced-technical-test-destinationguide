@@ -12,6 +12,7 @@ import XCTest
 //[✅] Update add all destination to the store
 //[✅] Delete the store remove all persisted destination
 //[✅] Get destination in the right order
+//[✅] On view model init all store destinations must be added to the recents destination section
 
 class UserDefaultsDestinationStore: DestinationStore {
   private let recentsDestinationsKey = "recentsDestinations"
@@ -75,6 +76,16 @@ class UserDefaultsDestinationsStoreTests: XCTestCase {
     let storeDestinations = sut.getDestinations()
     
     XCTAssertTrue(storeDestinations.isEmpty)
+  }
+  
+  func test_initViewModel_setRecentsDestinationWithStore() {
+    let destinations = [anyDestination(id: "1")]
+    let service = DestinationFetchingService()
+    let userDefaultStore = UserDefaultsDestinationStore()
+    userDefaultStore.update(with: destinations)
+    let viewModel = DestinationsViewModel(service: service, store: userDefaultStore)
+    
+    XCTAssertEqual(viewModel.recentsDestinations, destinations)
   }
   
   // MARK: - Helpers
