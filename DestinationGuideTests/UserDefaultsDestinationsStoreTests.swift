@@ -22,11 +22,16 @@ class UserDefaultsDestinationStore {
 class UserDefaultsDestinationsStoreTests: XCTestCase {
 
   func test_getDestinations_persistDestinations() {
-    let sut = UserDefaultsDestinationStore()
+    let sut = makeSUT()
     
     let destinations = sut.getDestinations()
     
     XCTAssertTrue(destinations.isEmpty)
   }
-
+  
+  // MARK: - Helpers
+  
+  private func makeSUT() -> UserDefaultsDestinationStore {
+    UserDefaultsDestinationStore()
+  }
 }
