@@ -26,8 +26,10 @@ class DestinationsViewModel: ObservableObject {
         didSet {
             addToRecentSection(selectedDestination)
             persistToStore(selectedDestination)
+            displayDetailsViewIfNeeded()
         }
     }
+    @Published var isDisplayDetailsView = false
     @Published var error: String?
     
     private var service: DestinationFetchingService
@@ -68,6 +70,11 @@ class DestinationsViewModel: ObservableObject {
 //    }
 
     // MARK: - Helpers
+    
+    private func displayDetailsViewIfNeeded() {
+        isDisplayDetailsView = selectedDestination == nil ? false : true
+    }
+    
     private func addToRecentSection(_ destination: Destination?) {
         if let destination = destination {
             if recentsDestinations.count >= 5 {
