@@ -60,12 +60,9 @@ class DestinationsRecentsTests: XCTestCase {
     func test_selectedDestination_maximumOfFiveRecentsDestinations() {
         let (sut, _) = makeSUT()
         
-        sut.selectedDestination = anyDestination(id: "1")
-        sut.selectedDestination = anyDestination(id: "2")
-        sut.selectedDestination = anyDestination(id: "3")
-        sut.selectedDestination = anyDestination(id: "4")
-        sut.selectedDestination = anyDestination(id: "5")
-        sut.selectedDestination = anyDestination(id: "6")
+        (0...6).forEach { index in
+            sut.selectedDestination = anyDestination(id: "\(index)")
+        }
         
         XCTAssertEqual(sut.recentsDestinations.count, 5)
     }
