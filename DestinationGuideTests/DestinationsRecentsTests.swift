@@ -17,7 +17,7 @@ import SwiftUI
 //[✅] Insert the last selected destination as the first element
 //[✅] On recent destination selection push to the details view
 //[✅] On already selected destination not add it to the recent section
-//[ ] On already selected destination not persist it in store
+//[✅] On already selected destination not persist it in store
 
 
 class DestinationsRecentsTests: XCTestCase {
@@ -108,10 +108,10 @@ class DestinationsRecentsTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+        XCTAssertEqual(store.messages, [.add(selectedDestination)], "Expected that the recent destination has been persist to the store on destination selection")
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+        XCTAssertEqual(store.messages, [.add(selectedDestination)], "Expected that the recent destination was not persist, double are not allowed")
     }
 
     // MARK: Helpers
