@@ -24,8 +24,8 @@ class DestinationsViewModel: ObservableObject {
     @Published var recentsDestinations = [Destination]()
     @Published var selectedDestination: Destination? {
         didSet {
-            addToRecentSection(selectedDestination)
             persistToStore(selectedDestination)
+            addToRecentSection(selectedDestination)
             displayDetailsViewIfNeeded()
         }
     }
@@ -87,6 +87,7 @@ class DestinationsViewModel: ObservableObject {
     
     private func persistToStore(_ destination: Destination?) {
         if let destination = destination {
+            guard !recentsDestinations.contains(destination) else { return }
             store.add(destination)
         }
     }

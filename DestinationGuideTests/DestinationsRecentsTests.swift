@@ -102,7 +102,18 @@ class DestinationsRecentsTests: XCTestCase {
         sut.selectedDestination = selectedDestination
         XCTAssertEqual(sut.recentsDestinations, [selectedDestination], "Expected that the recent destination was not be added, double are not allowed")
     }
+    
+    func test_selectedDestination_doesNotPersistRecentDestinationAlreadySelected() {
+        let selectedDestination = anyDestination(id: "1")
+        let (sut, store) = makeSUT()
         
+        sut.selectedDestination = selectedDestination
+        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+        
+        sut.selectedDestination = selectedDestination
+        XCTAssertEqual(store.messages, [.add(selectedDestination)])
+    }
+
     // MARK: Helpers
     
     private func makeSUT() -> (sut: DestinationsViewModel, store: DestinationStore) {
