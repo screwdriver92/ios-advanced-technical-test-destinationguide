@@ -38,13 +38,12 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_persistDestinationToTheStore() {
-        let initWithStore: [DestinationStoreSpy.Message] = [.deleteAll, .update([])]
         let selectedDestination = anyDestination(id: "1")
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
         
-        XCTAssertEqual(store.messages, initWithStore + [.deleteAll, .update([selectedDestination])])
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])])
     }
     
     func test_isDisplayRecentSection_displayRecentSectionIfAtLeastOneDestination() {
@@ -103,14 +102,13 @@ class DestinationsRecentsTests: XCTestCase {
     
     func test_selectedDestination_doesNotPersistRecentDestinationAlreadySelected() {
         let selectedDestination = anyDestination(id: "1")
-        let initWithStore: [DestinationStoreSpy.Message] = [.deleteAll, .update([])]
         let (sut, store) = makeSUT()
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, initWithStore + [.deleteAll, .update([selectedDestination])], "Expected that the recent destination has been persist to the store on destination selection")
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])], "Expected that the recent destination has been persist to the store on destination selection")
         
         sut.selectedDestination = selectedDestination
-        XCTAssertEqual(store.messages, initWithStore + [.deleteAll, .update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
+        XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
     }
     
     // MARK: Helpers

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol DestinationStore {
     func update(with destinations: [Destination])
@@ -14,9 +15,7 @@ protocol DestinationStore {
 
 class DestinationsViewModel: ObservableObject {
     @Published var destinations = [Destination]()
-    @Published var recentsDestinations = [Destination]() {
-        didSet { persistToStore(recentsDestinations) }
-    }
+    @Published var recentsDestinations = [Destination]()
     @Published var selectedDestination: Destination? {
         didSet {
             addToRecentSection(selectedDestination)
@@ -28,12 +27,20 @@ class DestinationsViewModel: ObservableObject {
     
     private var service: DestinationFetchingService
     private var store: DestinationStore
+    private var cancellables = Set<AnyCancellable>()
     
     init(service: DestinationFetchingService, store: DestinationStore) {
         self.service = service
         self.store = store
         getDestinations()
         recentsDestinations = store.getDestinations()
+        
+        $recentsDestinations
+            .dropFirst(1)
+            .sink(receiveValue: { [weak self] destinations in
+                self?.persistToStore(destinations)
+            })
+            .store(in: &cancellables)
     }
     
     func getDestinations() {
