@@ -15,10 +15,16 @@ import XCTest
 //[✅] On view model init all store destinations must be added to the recents destination section
 
 class UserDefaultsDestinationStore: DestinationStore {
+  
+  private let userDefaults: UserDefaults
   private let recentsDestinationsKey = "recentsDestinations"
   
+  init(userDefaults: UserDefaults = .standard) {
+    self.userDefaults = userDefaults
+  }
+
   func getDestinations() -> [Destination] {
-    if let data = UserDefaults.standard.data(forKey: recentsDestinationsKey) {
+    if let data = userDefaults.data(forKey: recentsDestinationsKey) {
       do {
         let destinations = try JSONDecoder().decode([Destination].self, from: data)
         return destinations
@@ -35,7 +41,7 @@ class UserDefaultsDestinationStore: DestinationStore {
     do {
         let encoder = JSONEncoder()
         let data = try encoder.encode(destinations)
-        UserDefaults.standard.set(data, forKey: recentsDestinationsKey)
+        userDefaults.set(data, forKey: recentsDestinationsKey)
 
     } catch {
         assertionFailure("Unable to Encode Array of destinations error (\(error))")
@@ -81,7 +87,7 @@ class UserDefaultsDestinationsStoreTests: XCTestCase {
   func test_initViewModel_setRecentsDestinationWithStore() {
     let destinations = [anyDestination(id: "1")]
     let service = DestinationFetchingService()
-    let userDefaultStore = UserDefaultsDestinationStore()
+    let userDefaultStore = UserDefaultsDestinationStore(userDefaults: testUserDefaults())
     userDefaultStore.update(with: destinations)
     let viewModel = DestinationsViewModel(service: service, store: userDefaultStore)
     
@@ -91,7 +97,7 @@ class UserDefaultsDestinationsStoreTests: XCTestCase {
   // MARK: - Helpers
   
   private func makeSUT() -> UserDefaultsDestinationStore {
-    let sut = UserDefaultsDestinationStore()
+    let sut = UserDefaultsDestinationStore(userDefaults: testUserDefaults())
     resetStoreToDefaults(with: sut)
     return sut
   }
@@ -105,5 +111,11 @@ class UserDefaultsDestinationsStoreTests: XCTestCase {
   private func anyDestination(id: String) -> Destination {
       Destination(id: id, name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
   }
-
+  
+  private func testUserDefaults() -> UserDefaults {
+    guard let testUserDefaults = UserDefaults(suiteName: "test.destination.app") else {
+      fatalError("Expected to create a UserDefaults object for test purpose")
+    }
+    return testUserDefaults
+  }
 }
