@@ -18,7 +18,7 @@ struct DestinationsView: View {
           DestinationsList(destinations: viewModel.destinations)
         }
       }
-      .padding(16)
+      .padding(.horizontal, 16)
       .navigationTitle("Destination")
       .navigationBarTitleDisplayMode(.inline)
     }
