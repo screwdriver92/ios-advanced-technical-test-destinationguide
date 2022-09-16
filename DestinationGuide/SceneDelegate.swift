@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -14,16 +15,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-//        if let windowScene = scene as? UIWindowScene {
-//            let window = UIWindow(windowScene: windowScene)
-//            let destinationService = DestinationFetchingService()
-//            let destinationStore = DestinationStoreSpy()
-//            let destinationViewModel = DestinationsViewModel(service: destinationService, store: destinationStore)
-//            let destinationViewController = DestinationsViewController(viewModel: destinationViewModel)
-//            window.rootViewController = UINavigationController(rootViewController: destinationViewController)
-//            self.window = window
-//            window.makeKeyAndVisible()
-//        }
+        if let windowScene = scene as? UIWindowScene {
+            let window = UIWindow(windowScene: windowScene)
+            let destinationService = DestinationFetchingService()
+            let destinationStore = UserDefaultsDestinationStore()
+            let destinationViewModel = DestinationsViewModel(service: destinationService, store: destinationStore)
+            let destinationView = DestinationsView(viewModel: destinationViewModel)
+            let destinationViewController = UIHostingController(rootView: destinationView)
+            
+            window.rootViewController = destinationViewController
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
