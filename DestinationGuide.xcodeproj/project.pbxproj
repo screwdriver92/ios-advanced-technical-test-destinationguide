@@ -105,6 +105,32 @@
 			path = Stores;
 			sourceTree = "<group>";
 		};
+		21DF58E028D53D7200A03EC3 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		21DF58E128D53D9500A03EC3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E794201926B853F10032C12E /* Destination.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		21DF58E228D53DC800A03EC3 /* Destination Details Feature */ = {
+			isa = PBXGroup;
+			children = (
+				E794201526B83BE90032C12E /* Services */,
+				E794201826B853E50032C12E /* Models */,
+				21F7018E28CFED5400EF6D98 /* View Models */,
+			);
+			path = "Destination Details Feature";
+			sourceTree = "<group>";
+		};
 		21F7018B28CFCB4A00EF6D98 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,7 +159,6 @@
 		21F7018E28CFED5400EF6D98 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */,
 				21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */,
 			);
 			path = "View Models";
@@ -142,7 +167,8 @@
 		21F7019528D1EA8E00EF6D98 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				21F7019B28D281D500EF6D98 /* Destination Feature */,
+				21F7019328D1E99000EF6D98 /* DestinationsView.swift */,
+				21F7019C28D2854E00EF6D98 /* Subviews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -150,8 +176,10 @@
 		21F7019B28D281D500EF6D98 /* Destination Feature */ = {
 			isa = PBXGroup;
 			children = (
-				21F7019328D1E99000EF6D98 /* DestinationsView.swift */,
-				21F7019C28D2854E00EF6D98 /* Subviews */,
+				21DF58E128D53D9500A03EC3 /* Models */,
+				21DF589828D4919700A03EC3 /* Stores */,
+				21DF58E028D53D7200A03EC3 /* View Models */,
+				21F7019528D1EA8E00EF6D98 /* Views */,
 			);
 			path = "Destination Feature";
 			sourceTree = "<group>";
@@ -191,7 +219,6 @@
 		E794201826B853E50032C12E /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E794201926B853F10032C12E /* Destination.swift */,
 				E794201B26B854040032C12E /* DestinationDetails.swift */,
 			);
 			path = Models;
@@ -220,11 +247,8 @@
 			children = (
 				E7AE6A8926B81F4F0059FB12 /* AppDelegate.swift */,
 				E7AE6A8B26B81F4F0059FB12 /* SceneDelegate.swift */,
-				E794201826B853E50032C12E /* Models */,
-				E794201526B83BE90032C12E /* Services */,
-				21DF589828D4919700A03EC3 /* Stores */,
-				21F7018E28CFED5400EF6D98 /* View Models */,
-				21F7019528D1EA8E00EF6D98 /* Views */,
+				21F7019B28D281D500EF6D98 /* Destination Feature */,
+				21DF58E228D53DC800A03EC3 /* Destination Details Feature */,
 				21F7018B28CFCB4A00EF6D98 /* View Controllers */,
 				21F7018C28CFCBBF00EF6D98 /* UIKit views */,
 				21F7018D28CFCBEC00EF6D98 /* UIKit Styles */,

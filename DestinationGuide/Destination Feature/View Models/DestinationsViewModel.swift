@@ -27,7 +27,7 @@ class DestinationsViewModel: ObservableObject {
     @Published var error: String?
     
     private var service: DestinationFetchingService
-    private var store: DestinationStore
+    var store: DestinationStore
     private var cancellables = Set<AnyCancellable>()
     
     init(service: DestinationFetchingService, store: DestinationStore) {
