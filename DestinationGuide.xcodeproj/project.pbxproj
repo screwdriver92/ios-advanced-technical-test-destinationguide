@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		21DF589A28D491A200A03EC3 /* UserDefaultsDestinationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */; };
 		21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */; };
 		21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */; };
 		21F7019428D1E99000EF6D98 /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019328D1E99000EF6D98 /* DestinationsView.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDestinationStore.swift; sourceTree = "<group>"; };
 		21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsViewModel.swift; sourceTree = "<group>"; };
 		21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModel.swift; sourceTree = "<group>"; };
 		21F7019328D1E99000EF6D98 /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21DF589828D4919700A03EC3 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
 		21F7018B28CFCB4A00EF6D98 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,6 +219,7 @@
 				E7AE6A8B26B81F4F0059FB12 /* SceneDelegate.swift */,
 				E794201826B853E50032C12E /* Models */,
 				E794201526B83BE90032C12E /* Services */,
+				21DF589828D4919700A03EC3 /* Stores */,
 				21F7018E28CFED5400EF6D98 /* View Models */,
 				21F7019528D1EA8E00EF6D98 /* Views */,
 				21F7018B28CFCB4A00EF6D98 /* View Controllers */,
@@ -341,6 +352,7 @@
 				E7878C1D26BACE2400CF1DB8 /* Styles.swift in Sources */,
 				E7AE6A8E26B81F4F0059FB12 /* DestinationsViewController.swift in Sources */,
 				21F7019E28D2856000EF6D98 /* DestinationHeader.swift in Sources */,
+				21DF589A28D491A200A03EC3 /* UserDefaultsDestinationStore.swift in Sources */,
 				21F7019428D1E99000EF6D98 /* DestinationsView.swift in Sources */,
 				E794201A26B853F10032C12E /* Destination.swift in Sources */,
 				E7AE6A8A26B81F4F0059FB12 /* AppDelegate.swift in Sources */,
