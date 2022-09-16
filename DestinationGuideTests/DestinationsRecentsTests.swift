@@ -123,8 +123,7 @@ class DestinationsRecentsTests: XCTestCase {
         Destination(id: id, name: "A country", picture: URL(string: "https://any-url.com")!, tag: "A tag", rating: 3)
     }
     
-  private class DestinationStoreSpy: DestinationStore {
-    
+    private class DestinationStoreSpy: DestinationStore {
         enum Message: Equatable {
             case update([Destination])
             case deleteAll
@@ -140,6 +139,8 @@ class DestinationsRecentsTests: XCTestCase {
         func getDestinations() -> [Destination] {
             return []
         }
+    
+        func deleteDestination() { }
         
         // MARK: - Helpers
         

@@ -10,7 +10,8 @@ import Combine
 
 protocol DestinationStore {
     func update(with destinations: [Destination])
-    func getDestinations() -> [Destination] 
+    func getDestinations() -> [Destination]
+    func deleteDestination()
 }
 
 class DestinationsViewModel: ObservableObject {
@@ -45,15 +46,21 @@ class DestinationsViewModel: ObservableObject {
     
     func getDestinations() {
         service.getDestinations { destinations in
-            self.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+            DispatchQueue.main.async {
+                self.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+            }
         }
     }
     
-    func title() -> String {
+    func headerDestinationsText() -> String {
         "Toutes nos destinations"
     }
+  
+    func headerRecentsText() -> String {
+        "Destinations récentes"
+    }
     
-    func isDisplayRecentSection() -> Bool {
+    var isDisplayRecentSection: Bool {
         !recentsDestinations.isEmpty
     }
         
@@ -95,6 +102,10 @@ class DestinationsViewModel: ObservableObject {
     }
     
     // UIKT
+    
+    func title() -> String {
+        "Toutes nos destinations"
+    }
     
     func numberOfItems() -> Int {
         destinations.count

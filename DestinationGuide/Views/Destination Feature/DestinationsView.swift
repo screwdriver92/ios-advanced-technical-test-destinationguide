@@ -13,14 +13,36 @@ struct DestinationsView: View {
   var body: some View {
     NavigationView {
       ScrollView(showsIndicators: false) {
-        VStack(alignment: .leading, spacing: 16) {
-          DestinationHeader(text: viewModel.title())
-          DestinationsList(destinations: viewModel.destinations)
+        Text("Delete UserDefaults")
+          .onTapGesture {
+            viewModel.recentsDestinations = []
+            viewModel.store.deleteDestination()
+          }
+        VStack(alignment: .leading, spacing: 54) {
+          if viewModel.isDisplayRecentSection {
+            VStack(alignment: .leading, spacing: 12) {
+              DestinationHeader(text: viewModel.headerRecentsText())
+              RecentsDestinationsList(
+                destinations: viewModel.recentsDestinations,
+                onDestinationTap: { destination in
+                  viewModel.selectedDestination = destination
+                })
+            }
+          }
+          VStack(alignment: .leading, spacing: 16) {
+            DestinationHeader(text: viewModel.headerDestinationsText())
+            DestinationsList(
+              destinations: viewModel.destinations,
+              onDestinationTap: { destination in
+                viewModel.selectedDestination = destination
+            })
+          }
         }
       }
       .padding(.horizontal, 16)
       .navigationTitle("Destination")
       .navigationBarTitleDisplayMode(.inline)
+      .animation(.spring(), value: viewModel.isDisplayRecentSection)
     }
   }
 }

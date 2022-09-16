@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21DF589A28D491A200A03EC3 /* UserDefaultsDestinationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */; };
+		21DF58DF28D533EC00A03EC3 /* RecentsDestinationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58DE28D533EC00A03EC3 /* RecentsDestinationsList.swift */; };
 		21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */; };
 		21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */; };
 		21F7019428D1E99000EF6D98 /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019328D1E99000EF6D98 /* DestinationsView.swift */; };
@@ -47,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDestinationStore.swift; sourceTree = "<group>"; };
+		21DF58DE28D533EC00A03EC3 /* RecentsDestinationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsDestinationsList.swift; sourceTree = "<group>"; };
 		21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsViewModel.swift; sourceTree = "<group>"; };
 		21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModel.swift; sourceTree = "<group>"; };
 		21F7019328D1E99000EF6D98 /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				21F7019D28D2856000EF6D98 /* DestinationHeader.swift */,
 				21F7019F28D2860300EF6D98 /* DestinationsList.swift */,
 				21F701A128D2874C00EF6D98 /* DestinationCellView.swift */,
+				21DF58DE28D533EC00A03EC3 /* RecentsDestinationsList.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */,
 				E7B8690B287C4701000D2C2C /* GradientView.swift in Sources */,
 				21F701A028D2860300EF6D98 /* DestinationsList.swift in Sources */,
+				21DF58DF28D533EC00A03EC3 /* RecentsDestinationsList.swift in Sources */,
 				21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */,
 				E710FABC2885AB4000326EEF /* Fonts.swift in Sources */,
 				E710FAC52885AF2E00326EEF /* DestinationDetailsViewController.swift in Sources */,
