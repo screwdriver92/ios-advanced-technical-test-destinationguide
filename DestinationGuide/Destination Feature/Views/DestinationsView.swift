@@ -38,6 +38,12 @@ struct DestinationsView: View {
             })
           }
         }
+        if let details = viewModel.destinationDetails {
+          NavigationLink(destination: DestinationDetailsView(details: details),
+                         isActive: $viewModel.isDisplayDetailsView) {
+            EmptyView()
+          }
+        }
       }
       .padding(.horizontal, 16)
       .navigationTitle("Destination")

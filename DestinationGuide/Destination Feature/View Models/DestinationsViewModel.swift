@@ -20,9 +20,12 @@ class DestinationsViewModel: ObservableObject {
     @Published var selectedDestination: Destination? {
         didSet {
             addToRecentSection(selectedDestination)
-            displayDetailsViewIfNeeded()
+            if let destinationId = selectedDestination?.id {
+                getDestinationDetails(with: destinationId) {}
+            }
         }
     }
+    var destinationDetails: DestinationDetailsSwiftUI?
     @Published var isDisplayDetailsView = false
     @Published var error: String?
     
@@ -62,6 +65,21 @@ class DestinationsViewModel: ObservableObject {
     
     var isDisplayRecentSection: Bool {
         !recentsDestinations.isEmpty
+    }
+  
+    func getDestinationDetails(with id: Destination.ID, completion: @escaping () -> Void) {
+        service.getDestinationDetailsSwiftUI(for: id) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(details):
+                    self?.displayDetailsViewIfNeeded()
+                    self?.destinationDetails = details
+                case let .failure(error):
+                    self?.error = error.localizedDescription
+                }
+                completion()
+            }
+        }
     }
         
 //    func getDestinationDetails(with id: Destination.ID) {

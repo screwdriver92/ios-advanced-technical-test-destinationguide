@@ -50,11 +50,11 @@ class DestinationsRecentsTests: XCTestCase {
         let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
-        XCTAssertFalse(sut.isDisplayRecentSection(), "Precondition - the section is hidden, no destination has been selected yet")
+        XCTAssertFalse(sut.isDisplayRecentSection, "Precondition - the section is hidden, no destination has been selected yet")
         
         sut.selectedDestination = selectedDestination
         
-        XCTAssertTrue(sut.isDisplayRecentSection(), "Expected to display the recent section after a destination selection")
+        XCTAssertTrue(sut.isDisplayRecentSection, "Expected to display the recent section after a destination selection")
     }
     
     func test_selectedDestination_maximumOfFiveRecentsDestinations() {
@@ -79,14 +79,23 @@ class DestinationsRecentsTests: XCTestCase {
     }
     
     func test_selectedDestination_displayDestinationDetailsView() {
-        let selectedDestination = anyDestination(id: "1")
+        let selectedDestination = anyDestination(id: "217")
+        let expectedDestinationDetails = DestinationDetailsSwiftUI(id: "217", name: "Barbade", url: URL(string: "https://any-url.com")!, tag: "incontournable", description: "description", circuits: [])
         let (sut, _) = makeSUT()
         
         XCTAssertFalse(sut.isDisplayDetailsView, "Precondition - the selected destination is nil on init, nothing to display")
-        
+                
         sut.selectedDestination = selectedDestination
+
+        let exp = XCTestExpectation(description: "Expected the request to complete")
+        sut.getDestinationDetails(with: selectedDestination.id) {
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 10)
         
         XCTAssertTrue(sut.isDisplayDetailsView, "Expected to display destination details view on destination selection")
+        XCTAssertEqual(sut.destinationDetails, expectedDestinationDetails, "Expected to get a destination details view to display on destination selection")
     }
     
     func test_selectedDestination_doesNotAddToRecentDestinationAlreadySelectedDestination() {
