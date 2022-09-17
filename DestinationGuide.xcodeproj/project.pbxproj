@@ -10,6 +10,8 @@
 		21DF589A28D491A200A03EC3 /* UserDefaultsDestinationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */; };
 		21DF58DF28D533EC00A03EC3 /* RecentsDestinationsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58DE28D533EC00A03EC3 /* RecentsDestinationsList.swift */; };
 		21DF58E428D540B500A03EC3 /* DestinationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E328D540B500A03EC3 /* DestinationDetailsView.swift */; };
+		21DF58E728D690B600A03EC3 /* DestinationDetailsSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E628D690B600A03EC3 /* DestinationDetailsSwiftUI.swift */; };
+		21DF58E928D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E828D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift */; };
 		21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */; };
 		21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */; };
 		21F7019428D1E99000EF6D98 /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019328D1E99000EF6D98 /* DestinationsView.swift */; };
@@ -51,6 +53,8 @@
 		21DF589928D491A200A03EC3 /* UserDefaultsDestinationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDestinationStore.swift; sourceTree = "<group>"; };
 		21DF58DE28D533EC00A03EC3 /* RecentsDestinationsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsDestinationsList.swift; sourceTree = "<group>"; };
 		21DF58E328D540B500A03EC3 /* DestinationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsView.swift; sourceTree = "<group>"; };
+		21DF58E628D690B600A03EC3 /* DestinationDetailsSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsSwiftUI.swift; sourceTree = "<group>"; };
+		21DF58E828D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModelSwiftUI.swift; sourceTree = "<group>"; };
 		21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsViewModel.swift; sourceTree = "<group>"; };
 		21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModel.swift; sourceTree = "<group>"; };
 		21F7019328D1E99000EF6D98 /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */,
+				21DF58E828D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				E794201B26B854040032C12E /* DestinationDetails.swift */,
+				21DF58E628D690B600A03EC3 /* DestinationDetailsSwiftUI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,9 +401,11 @@
 				E794201A26B853F10032C12E /* Destination.swift in Sources */,
 				21DF58E428D540B500A03EC3 /* DestinationDetailsView.swift in Sources */,
 				E7AE6A8A26B81F4F0059FB12 /* AppDelegate.swift in Sources */,
+				21DF58E928D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift in Sources */,
 				E7AE6A8C26B81F4F0059FB12 /* SceneDelegate.swift in Sources */,
 				21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */,
 				E7B8690B287C4701000D2C2C /* GradientView.swift in Sources */,
+				21DF58E728D690B600A03EC3 /* DestinationDetailsSwiftUI.swift in Sources */,
 				21F701A028D2860300EF6D98 /* DestinationsList.swift in Sources */,
 				21DF58DF28D533EC00A03EC3 /* RecentsDestinationsList.swift in Sources */,
 				21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */,

@@ -7,32 +7,13 @@
 
 import SwiftUI
 
-struct DestinationDetailsSwiftUI: Identifiable, Equatable {
-  let id: String
-  let name: String
-  let url: URL
-  let tag: String
-  let description: String
-  let circuits: [Circuit]
-  
-  struct Circuit {
-    let description: String
-    let url: URL
-  }
-
-    static func == (lhs: DestinationDetailsSwiftUI, rhs: DestinationDetailsSwiftUI) -> Bool {
-        lhs.id == rhs.id
-    }
-}
-
 struct DestinationDetailsView: View {
-  let details: DestinationDetailsSwiftUI
-  @State private var isDescriptionExpended = false
+  let viewModel: DestinationDetailsViewModelSwiftUI
   
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 27) {
-        AsyncImage(url: details.url) { phase in
+        AsyncImage(url: viewModel.details.url) { phase in
           if let image = phase.image {
             image
               .resizable()
@@ -53,24 +34,23 @@ struct DestinationDetailsView: View {
         .frame(maxWidth: .infinity)
         .background(Color.primary.opacity(0.10))
         VStack(alignment: .leading, spacing: 16) {
-          Text(details.tag)
+          Text(viewModel.details.tag)
             .font(designSystemFont: .defaultXsBold)
             .foregroundColor(SwiftUI.Color.white)
             .padding(.horizontal, 8)
             .background(Color("incontournable"))
             .cornerRadius(4)
-          Text(details.name)
+          Text(viewModel.details.name)
             .font(designSystemFont: .defaultLExtrabold)
           VStack(alignment: .leading, spacing: 0) {
-            Text(details.description)
+            Text(viewModel.details.description)
               .font(designSystemFont: .defaultXsRegular)
-              .lineLimit(isDescriptionExpended ? 100 : 3)
+              .lineLimit(viewModel.isDescriptionExpended ? 100 : 3)
               .transition(.opacity)
             Button(action: {
-              print("button tapped")
-              isDescriptionExpended.toggle()
+              viewModel.toggleDescriptionVisibity()
             }, label: {
-              Text(isDescriptionExpended ? "Voir moins" : "Voir plus")
+              Text(viewModel.isDescriptionExpended ? "Voir moins" : "Voir plus")
                 .font(designSystemFont: .defaultXsBold)
             })
             .buttonStyle(.plain)
@@ -84,7 +64,7 @@ struct DestinationDetailsView: View {
           ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .top, spacing: 16) {
               Color.clear.frame(width: 0)
-              ForEach(details.circuits, id: \.description) { circuit in
+              ForEach(viewModel.details.circuits, id: \.description) { circuit in
                 VStack {
                   AsyncImage(url: circuit.url) { phase in
                     if let image = phase.image {
@@ -119,8 +99,8 @@ struct DestinationDetailsView: View {
         Spacer()
       }
     }
-    .animation(.default, value: isDescriptionExpended)
-    .navigationTitle(details.name)
+    .animation(.default, value: viewModel.isDescriptionExpended)
+    .navigationTitle(viewModel.details.name)
     .navigationBarTitleDisplayMode(.inline)
   }
 }
@@ -129,21 +109,22 @@ struct DestinationDetailsView_Previews: PreviewProvider {
   static var imageURL = URL(string: "https://static1.evcdn.net/images/reduction/1027399_w-800_h-800_q-70_m-crop.jpg")!
   
   static var previews: some View {
-      DestinationDetailsView(
-        details: DestinationDetailsSwiftUI(
-          id: "1",
-          name: "Asie",
-          url: imageURL,
-          tag: "incontournable",
-          description: "Immense continent aux portes de l’Europe, l’Asie recèle bien des trésors. L’Inde, la Chine, le Vietnam, le Japon, tant de pays qui continent aux portes de l’Europe, l’Asie recèle bien des trésors. L’Inde, la Chine, le Vietnam, le Japon, tant de pays",
-          circuits: [
-            .init(description: "Splendeurs khmères d'Angkor au Tonle Sap",
-                  url: imageURL),
-            .init(description: "De la montagne du Vietnam au delta du Cambodge",
-                  url: imageURL),
-            .init(description: "Le festival de Jakar en petit groupe",
-                  url: imageURL)
-          ])
+    DestinationDetailsView(
+      viewModel: .init(details: DestinationDetailsSwiftUI(
+        id: "1",
+        name: "Asie",
+        url: imageURL,
+        tag: "incontournable",
+        description: "Immense continent aux portes de l’Europe, l’Asie recèle bien des trésors. L’Inde, la Chine, le Vietnam, le Japon, tant de pays qui continent aux portes de l’Europe, l’Asie recèle bien des trésors. L’Inde, la Chine, le Vietnam, le Japon, tant de pays",
+        circuits: [
+          .init(description: "Splendeurs khmères d'Angkor au Tonle Sap",
+                url: imageURL),
+          .init(description: "De la montagne du Vietnam au delta du Cambodge",
+                url: imageURL),
+          .init(description: "Le festival de Jakar en petit groupe",
+                url: imageURL)
+        ])
       )
+    )
   }
 }
