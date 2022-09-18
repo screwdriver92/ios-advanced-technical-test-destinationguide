@@ -25,7 +25,7 @@ struct DestinationsView: View {
               RecentsDestinationsList(
                 destinations: viewModel.recentsDestinations,
                 onDestinationTap: { destination in
-                  viewModel.selectedDestination = destination
+                    viewModel.updateSelectedDestination(with: destination)
                 })
             }
           }
@@ -34,7 +34,7 @@ struct DestinationsView: View {
             DestinationsList(
               destinations: viewModel.destinations,
               onDestinationTap: { destination in
-                viewModel.selectedDestination = destination
+                  viewModel.updateSelectedDestination(with: destination)
             })
           }
         }

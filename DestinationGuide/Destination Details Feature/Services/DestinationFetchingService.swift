@@ -25,7 +25,7 @@ class DestinationFetchingService : DestinationFetchingServiceProtocol {
     }
     
     func getDestinationDetails(for destinationID: Destination.ID, completion: @escaping  (Result<DestinationDetails, DestinationFetchingServiceError>) -> ()) {
-        let extraSeconds = Double.random(in: 1..<5)
+        let extraSeconds = Double.random(in: 1..<2)
         DispatchQueue.global().asyncAfter(deadline: .now() + extraSeconds) {
             let destinationDetails = destinationDetailsStub
                 .first(where: { $0.id == destinationID})

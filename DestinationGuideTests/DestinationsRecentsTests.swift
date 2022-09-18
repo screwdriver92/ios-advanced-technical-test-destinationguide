@@ -24,7 +24,7 @@ import SwiftUI
 // LOADER DESTINATION DETAILS FEATURE
 //[✅] If no destination selected hide the loader
 //[✅] If destination selected display the loader
-//[ ] If loader is visible it's not possible to select an other destination
+//[✅] If loader is visible it's not possible to select an other destination
 //[ ] On destination details push, reset the selected destination
 
 class DestinationsRecentsTests: XCTestCase {
@@ -40,7 +40,7 @@ class DestinationsRecentsTests: XCTestCase {
         let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         
         XCTAssertEqual(sut.recentsDestinations, [selectedDestination])
     }
@@ -49,7 +49,7 @@ class DestinationsRecentsTests: XCTestCase {
         let selectedDestination = anyDestination(id: "1")
         let (sut, store) = makeSUT()
         
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         
         XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])])
     }
@@ -60,7 +60,7 @@ class DestinationsRecentsTests: XCTestCase {
         
         XCTAssertFalse(sut.isDisplayRecentSection, "Precondition - the section is hidden, no destination has been selected yet")
         
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         
         XCTAssertTrue(sut.isDisplayRecentSection, "Expected to display the recent section after a destination selection")
     }
@@ -69,20 +69,25 @@ class DestinationsRecentsTests: XCTestCase {
         let (sut, _) = makeSUT()
         
         (0...6).forEach { index in
-            sut.selectedDestination = anyDestination(id: "\(index)")
+            let anyDestination = anyDestination(id: "\(index)")
+            sut.selectedDestination = anyDestination
+            wait(sut, toCompleteDestinationDetailsWith: anyDestination)
         }
         
         XCTAssertEqual(sut.recentsDestinations.count, 5)
     }
-    
+        
     func test_selectedDestination_insertLastSelectedDestinationaAsTheFirstElement() {
-        let selectedDestination = anyDestination(id: "1")
-        let lastSelectedDestination = anyDestination(id: "2")
+        let selectedDestination = anyDestination(id: "217")
+        let lastSelectedDestination = anyDestination(id: "50")
         let (sut, _) = makeSUT()
         
-        sut.selectedDestination = selectedDestination
-        sut.selectedDestination = lastSelectedDestination
-        
+        sut.updateSelectedDestination(with: selectedDestination)
+        wait(sut, toCompleteDestinationDetailsWith: selectedDestination)
+                
+        sut.updateSelectedDestination(with: lastSelectedDestination)
+        wait(sut, toCompleteDestinationDetailsWith: lastSelectedDestination)
+
         XCTAssertEqual(sut.recentsDestinations, [lastSelectedDestination, selectedDestination])
     }
     
@@ -93,7 +98,7 @@ class DestinationsRecentsTests: XCTestCase {
         
         XCTAssertFalse(sut.isDisplayDetailsView, "Precondition - the selected destination is nil on init, nothing to display")
                 
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
 
         let exp = XCTestExpectation(description: "Expected the request to complete")
         sut.getDestinationDetails(with: selectedDestination.id) {
@@ -110,10 +115,10 @@ class DestinationsRecentsTests: XCTestCase {
         let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
                 
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         XCTAssertEqual(sut.recentsDestinations, [selectedDestination], "Expected that the recent destination has been added to the recent section on destination selection")
         
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         XCTAssertEqual(sut.recentsDestinations, [selectedDestination], "Expected that the recent destination was not be added, double are not allowed")
     }
     
@@ -140,9 +145,20 @@ class DestinationsRecentsTests: XCTestCase {
         let selectedDestination = anyDestination(id: "1")
         let (sut, _) = makeSUT()
         
-        sut.selectedDestination = selectedDestination
+        sut.updateSelectedDestination(with: selectedDestination)
         
         XCTAssertTrue(sut.isDisplayDestinationDetailsLoader)
+    }
+    
+    func test_selectedDestination_doesNotSelectOtherDestinationIfLoadingDetailsView() {
+        let selectedDestination = anyDestination(id: "1")
+        let otherDestination = anyDestination(id: "2")
+        let (sut, _) = makeSUT()
+        
+        sut.updateSelectedDestination(with: selectedDestination)
+        sut.updateSelectedDestination(with: otherDestination)
+        
+        XCTAssertEqual(sut.selectedDestination, selectedDestination)
     }
     
     // MARK: Helpers
@@ -151,6 +167,15 @@ class DestinationsRecentsTests: XCTestCase {
         let store = DestinationStoreSpy()
         let sut = DestinationsViewModel(service: DestinationFetchingService(), store: store)
         return (sut, store)
+    }
+    
+    private func wait(_ sut: DestinationsViewModel, toCompleteDestinationDetailsWith destination: Destination) {
+        let exp = XCTestExpectation(description: "Expect that the get destination details completes")
+        sut.getDestinationDetails(with: destination.id) {
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10)
+        return
     }
     
     private func anyDestination(id: String) -> Destination {

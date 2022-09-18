@@ -23,17 +23,12 @@ class DestinationsViewModel: ObservableObject {
             if let destinationId = selectedDestination?.id {
                 getDestinationDetails(with: destinationId) {}
             }
-            displayDestinationDetailsLoader()
         }
     }
     var destinationDetails: DestinationDetailsSwiftUI?
     @Published var isDisplayDetailsView = false
     @Published var isDisplayDestinationDetailsLoader = false
     @Published var error: String?
-    
-    private func displayDestinationDetailsLoader() {
-        isDisplayDestinationDetailsLoader = true
-    }
     
     private var service: DestinationFetchingService
     var store: DestinationStore
@@ -51,6 +46,12 @@ class DestinationsViewModel: ObservableObject {
                 self?.persistToStore(destinations)
             })
             .store(in: &cancellables)
+    }
+    
+    func updateSelectedDestination(with destination: Destination) {
+        if !isDisplayDestinationDetailsLoader {
+            selectedDestination = destination
+        }
     }
     
     func getDestinations() {
@@ -74,7 +75,11 @@ class DestinationsViewModel: ObservableObject {
     }
   
     func getDestinationDetails(with id: Destination.ID, completion: @escaping () -> Void) {
+        displayDestinationDetailsLoader()
+        
         service.getDestinationDetailsSwiftUI(for: id) { [weak self] result in
+            self?.hideDestinationDetailsLoader()
+            
             DispatchQueue.main.async {
                 switch result {
                 case let .success(details):
@@ -123,6 +128,14 @@ class DestinationsViewModel: ObservableObject {
 //            guard !recentsDestinations.contains(destination) else { return }
         store.update(with: destinations)
 //        }
+    }
+    
+    private func displayDestinationDetailsLoader() {
+        isDisplayDestinationDetailsLoader = true
+    }
+    
+    private func hideDestinationDetailsLoader() {
+        isDisplayDestinationDetailsLoader = false
     }
     
     // UIKT
