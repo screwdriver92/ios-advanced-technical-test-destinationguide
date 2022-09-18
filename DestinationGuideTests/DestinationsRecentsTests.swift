@@ -23,7 +23,7 @@ import SwiftUI
 
 // LOADER DESTINATION DETAILS FEATURE
 //[✅] If no destination selected hide the loader
-//[ ] If destination selected display the loader
+//[✅] If destination selected display the loader
 //[ ] If loader is visible it's not possible to select an other destination
 //[ ] On destination details push, reset the selected destination
 
@@ -134,6 +134,15 @@ class DestinationsRecentsTests: XCTestCase {
         let (sut, _) = makeSUT()
         
         XCTAssertFalse(sut.isDisplayDestinationDetailsLoader)
+    }
+
+    func test_selectedDestination_displayDestinationDetailsLoader() {
+        let selectedDestination = anyDestination(id: "1")
+        let (sut, _) = makeSUT()
+        
+        sut.selectedDestination = selectedDestination
+        
+        XCTAssertTrue(sut.isDisplayDestinationDetailsLoader)
     }
     
     // MARK: Helpers

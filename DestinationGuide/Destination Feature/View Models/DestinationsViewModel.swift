@@ -23,12 +23,17 @@ class DestinationsViewModel: ObservableObject {
             if let destinationId = selectedDestination?.id {
                 getDestinationDetails(with: destinationId) {}
             }
+            displayDestinationDetailsLoader()
         }
     }
     var destinationDetails: DestinationDetailsSwiftUI?
     @Published var isDisplayDetailsView = false
     @Published var isDisplayDestinationDetailsLoader = false
     @Published var error: String?
+    
+    private func displayDestinationDetailsLoader() {
+        isDisplayDestinationDetailsLoader = true
+    }
     
     private var service: DestinationFetchingService
     var store: DestinationStore
