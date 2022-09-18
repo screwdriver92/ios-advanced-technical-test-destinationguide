@@ -9,6 +9,7 @@ import XCTest
 @testable import DestinationGuide
 import SwiftUI
 
+// PERSIST DESTINATION FEATURE
 //[✅] On init recent destinations section must be empty
 //[✅] On selection destination add it to the recent section
 //[✅] On selection destination persist it to the store
@@ -20,7 +21,14 @@ import SwiftUI
 //[✅] On already selected destination not persist it in store
 //[✅] On store update, all destinations must be deleted before
 
+// LOADER DESTINATION DETAILS FEATURE
+//[✅] If no destination selected hide the loader
+//[ ] If destination selected display the loader
+//[ ] If loader is visible it's not possible to select an other destination
+//[ ] On destination details push, reset the selected destination
+
 class DestinationsRecentsTests: XCTestCase {
+    // MARK: - PERSIST DESTINATION FEATURE
     
     func test_init_recentsDestinationsIsEmpty() {
         let (sut, _) = makeSUT()
@@ -118,6 +126,14 @@ class DestinationsRecentsTests: XCTestCase {
         
         sut.selectedDestination = selectedDestination
         XCTAssertEqual(store.messages, [.deleteAll, .update([selectedDestination])], "Expected that the recent destination was not persist, double are not allowed")
+    }
+    
+    // MARK: - LOADER DESTINATION DETAILS FEATURE
+    
+    func test_init_hideDestinationDetailsLoader() {
+        let (sut, _) = makeSUT()
+        
+        XCTAssertFalse(sut.isDisplayDestinationDetailsLoader)
     }
     
     // MARK: Helpers

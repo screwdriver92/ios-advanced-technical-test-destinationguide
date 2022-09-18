@@ -27,6 +27,7 @@ class DestinationsViewModel: ObservableObject {
     }
     var destinationDetails: DestinationDetailsSwiftUI?
     @Published var isDisplayDetailsView = false
+    @Published var isDisplayDestinationDetailsLoader = false
     @Published var error: String?
     
     private var service: DestinationFetchingService
