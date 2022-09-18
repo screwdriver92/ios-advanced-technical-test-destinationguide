@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DestinationDetailsViewModelSwiftUI {
+class DestinationDetailsViewModelSwiftUI: ObservableObject {
   @Published var isDescriptionExpended = false
   let details: DestinationDetailsSwiftUI
   

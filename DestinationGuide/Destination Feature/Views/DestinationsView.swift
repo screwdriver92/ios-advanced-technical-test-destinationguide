@@ -39,7 +39,7 @@ struct DestinationsView: View {
           }
         }
         if let details = viewModel.destinationDetails {
-          NavigationLink(destination: DestinationDetailsView(details: details),
+          NavigationLink(destination: DestinationDetailsView(viewModel: .init(details: details)),
                          isActive: $viewModel.isDisplayDetailsView) {
             EmptyView()
           }

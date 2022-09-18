@@ -12,6 +12,12 @@
 		21DF58E428D540B500A03EC3 /* DestinationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E328D540B500A03EC3 /* DestinationDetailsView.swift */; };
 		21DF58E728D690B600A03EC3 /* DestinationDetailsSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E628D690B600A03EC3 /* DestinationDetailsSwiftUI.swift */; };
 		21DF58E928D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58E828D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift */; };
+		21DF58EB28D699E100A03EC3 /* DestinationDetailsImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58EA28D699E100A03EC3 /* DestinationDetailsImageView.swift */; };
+		21DF58EE28D69A4700A03EC3 /* DestinationDetailsTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58ED28D69A4700A03EC3 /* DestinationDetailsTagView.swift */; };
+		21DF58F028D69A9400A03EC3 /* DestinationDetailsNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58EF28D69A9400A03EC3 /* DestinationDetailsNameView.swift */; };
+		21DF58F228D69ACA00A03EC3 /* DestinationDetailsDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58F128D69ACA00A03EC3 /* DestinationDetailsDescriptionView.swift */; };
+		21DF58F428D69B4100A03EC3 /* DestinationDetailsHeaderCircuitsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58F328D69B4100A03EC3 /* DestinationDetailsHeaderCircuitsView.swift */; };
+		21DF58F628D69B8200A03EC3 /* DestinationDetailsCircuitsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21DF58F528D69B8200A03EC3 /* DestinationDetailsCircuitsList.swift */; };
 		21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */; };
 		21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */; };
 		21F7019428D1E99000EF6D98 /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21F7019328D1E99000EF6D98 /* DestinationsView.swift */; };
@@ -55,6 +61,12 @@
 		21DF58E328D540B500A03EC3 /* DestinationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsView.swift; sourceTree = "<group>"; };
 		21DF58E628D690B600A03EC3 /* DestinationDetailsSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsSwiftUI.swift; sourceTree = "<group>"; };
 		21DF58E828D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModelSwiftUI.swift; sourceTree = "<group>"; };
+		21DF58EA28D699E100A03EC3 /* DestinationDetailsImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsImageView.swift; sourceTree = "<group>"; };
+		21DF58ED28D69A4700A03EC3 /* DestinationDetailsTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsTagView.swift; sourceTree = "<group>"; };
+		21DF58EF28D69A9400A03EC3 /* DestinationDetailsNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsNameView.swift; sourceTree = "<group>"; };
+		21DF58F128D69ACA00A03EC3 /* DestinationDetailsDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsDescriptionView.swift; sourceTree = "<group>"; };
+		21DF58F328D69B4100A03EC3 /* DestinationDetailsHeaderCircuitsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsHeaderCircuitsView.swift; sourceTree = "<group>"; };
+		21DF58F528D69B8200A03EC3 /* DestinationDetailsCircuitsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsCircuitsList.swift; sourceTree = "<group>"; };
 		21F7018F28CFED6F00EF6D98 /* DestinationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsViewModel.swift; sourceTree = "<group>"; };
 		21F7019128D12D7700EF6D98 /* DestinationDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationDetailsViewModel.swift; sourceTree = "<group>"; };
 		21F7019328D1E99000EF6D98 /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
@@ -142,8 +154,22 @@
 			isa = PBXGroup;
 			children = (
 				21DF58E328D540B500A03EC3 /* DestinationDetailsView.swift */,
+				21DF58EC28D69A3500A03EC3 /* Subviews */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		21DF58EC28D69A3500A03EC3 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				21DF58EA28D699E100A03EC3 /* DestinationDetailsImageView.swift */,
+				21DF58ED28D69A4700A03EC3 /* DestinationDetailsTagView.swift */,
+				21DF58EF28D69A9400A03EC3 /* DestinationDetailsNameView.swift */,
+				21DF58F128D69ACA00A03EC3 /* DestinationDetailsDescriptionView.swift */,
+				21DF58F328D69B4100A03EC3 /* DestinationDetailsHeaderCircuitsView.swift */,
+				21DF58F528D69B8200A03EC3 /* DestinationDetailsCircuitsList.swift */,
+			);
+			path = Subviews;
 			sourceTree = "<group>";
 		};
 		21F7018B28CFCB4A00EF6D98 /* View Controllers */ = {
@@ -392,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E794201726B83C0E0032C12E /* DestinationFetchingService.swift in Sources */,
+				21DF58F228D69ACA00A03EC3 /* DestinationDetailsDescriptionView.swift in Sources */,
 				21F701A228D2874C00EF6D98 /* DestinationCellView.swift in Sources */,
 				E7878C1D26BACE2400CF1DB8 /* Styles.swift in Sources */,
 				E7AE6A8E26B81F4F0059FB12 /* DestinationsViewController.swift in Sources */,
@@ -401,16 +428,21 @@
 				E794201A26B853F10032C12E /* Destination.swift in Sources */,
 				21DF58E428D540B500A03EC3 /* DestinationDetailsView.swift in Sources */,
 				E7AE6A8A26B81F4F0059FB12 /* AppDelegate.swift in Sources */,
+				21DF58F428D69B4100A03EC3 /* DestinationDetailsHeaderCircuitsView.swift in Sources */,
 				21DF58E928D6937200A03EC3 /* DestinationDetailsViewModelSwiftUI.swift in Sources */,
 				E7AE6A8C26B81F4F0059FB12 /* SceneDelegate.swift in Sources */,
+				21DF58EB28D699E100A03EC3 /* DestinationDetailsImageView.swift in Sources */,
 				21F7019028CFED6F00EF6D98 /* DestinationsViewModel.swift in Sources */,
 				E7B8690B287C4701000D2C2C /* GradientView.swift in Sources */,
+				21DF58F628D69B8200A03EC3 /* DestinationDetailsCircuitsList.swift in Sources */,
 				21DF58E728D690B600A03EC3 /* DestinationDetailsSwiftUI.swift in Sources */,
+				21DF58EE28D69A4700A03EC3 /* DestinationDetailsTagView.swift in Sources */,
 				21F701A028D2860300EF6D98 /* DestinationsList.swift in Sources */,
 				21DF58DF28D533EC00A03EC3 /* RecentsDestinationsList.swift in Sources */,
 				21F7019228D12D7700EF6D98 /* DestinationDetailsViewModel.swift in Sources */,
 				E710FABC2885AB4000326EEF /* Fonts.swift in Sources */,
 				E710FAC52885AF2E00326EEF /* DestinationDetailsViewController.swift in Sources */,
+				21DF58F028D69A9400A03EC3 /* DestinationDetailsNameView.swift in Sources */,
 				E794201C26B854040032C12E /* DestinationDetails.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

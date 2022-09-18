@@ -8,93 +8,26 @@
 import SwiftUI
 
 struct DestinationDetailsView: View {
-  let viewModel: DestinationDetailsViewModelSwiftUI
+  @ObservedObject var viewModel: DestinationDetailsViewModelSwiftUI
   
   var body: some View {
     ScrollView {
       VStack(alignment: .leading, spacing: 27) {
-        AsyncImage(url: viewModel.details.url) { phase in
-          if let image = phase.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(height: 280)
-              .clipped()
-          } else if phase.error != nil {
-            Color.red
-              .frame(maxWidth: .infinity)
-              .frame(height: 280)
-          } else {
-            ProgressView()
-              .tint(.secondary)
-              .scaleEffect(2)
-          }
-        }
-        .frame(height: 280)
-        .frame(maxWidth: .infinity)
-        .background(Color.primary.opacity(0.10))
+        DestinationDetailsImageView(url: viewModel.details.url)
         VStack(alignment: .leading, spacing: 16) {
-          Text(viewModel.details.tag)
-            .font(designSystemFont: .defaultXsBold)
-            .foregroundColor(SwiftUI.Color.white)
-            .padding(.horizontal, 8)
-            .background(Color("incontournable"))
-            .cornerRadius(4)
-          Text(viewModel.details.name)
-            .font(designSystemFont: .defaultLExtrabold)
-          VStack(alignment: .leading, spacing: 0) {
-            Text(viewModel.details.description)
-              .font(designSystemFont: .defaultXsRegular)
-              .lineLimit(viewModel.isDescriptionExpended ? 100 : 3)
-              .transition(.opacity)
-            Button(action: {
+          DestinationDetailsTagView(tag: viewModel.details.tag)
+          DestinationDetailsNameView(name: viewModel.details.name)
+          DestinationDetailsDescriptionView(
+            description: viewModel.details.description,
+            isExpended: $viewModel.isDescriptionExpended,
+            onToggleExpendedTap: {
               viewModel.toggleDescriptionVisibity()
-            }, label: {
-              Text(viewModel.isDescriptionExpended ? "Voir moins" : "Voir plus")
-                .font(designSystemFont: .defaultXsBold)
             })
-            .buttonStyle(.plain)
-          }
         }
         .padding(.horizontal, 16)
         VStack(alignment: .leading, spacing: 16) {
-          Text("Idée de circuits")
-            .padding(.leading, 16)
-            .font(designSystemFont: .defaultMExtrabold)
-          ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .top, spacing: 16) {
-              Color.clear.frame(width: 0)
-              ForEach(viewModel.details.circuits, id: \.description) { circuit in
-                VStack {
-                  AsyncImage(url: circuit.url) { phase in
-                    if let image = phase.image {
-                      image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 144, height: 166)
-                    } else if phase.error != nil {
-                      Color.red
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 166)
-                    } else {
-                      ProgressView()
-                        .tint(.secondary)
-                        .scaleEffect(2)
-                    }
-                  }
-                  .frame(height: 166)
-                  .frame(maxWidth: .infinity)
-                  .background(Color.primary.opacity(0.10))
-                  .cornerRadius(8)
-                  
-                  Text(circuit.description)
-                    .font(designSystemFont: .defaultXsBold)
-                }
-                .frame(width: 144)
-              }
-              Color.clear.frame(width: 0)
-            }
-          }
+          DestinationDetailsHeaderCircuitsView(text: "Idée de circuits")
+          DestinationDetailsCircuitsList(circuits: viewModel.details.circuits)
         }
         Spacer()
       }
