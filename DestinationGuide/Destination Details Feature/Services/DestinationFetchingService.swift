@@ -34,7 +34,7 @@ class DestinationFetchingService : DestinationFetchingServiceProtocol {
     }
   
     func getDestinationDetailsSwiftUI(for destinationID: Destination.ID, completion: @escaping  (Result<DestinationDetailsSwiftUI, DestinationFetchingServiceError>) -> ()) {
-        let extraMilliseconds = Int.random(in: 1..<5)
+        let extraMilliseconds = Int.random(in: 500..<750)
         DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(extraMilliseconds)) {
             let destinationDetails = destinationDetailsSwiftUIStub
                 .first(where: { $0.id == destinationID})
