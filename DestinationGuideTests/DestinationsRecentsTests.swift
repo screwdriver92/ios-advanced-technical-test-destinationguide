@@ -27,6 +27,10 @@ import SwiftUI
 //[✅] If loader is visible it's not possible to select an other destination
 //[✅] On destination details completion, reset the selected destination
 
+// LOAD DESTINATION PLACEHOLDER FEATURE
+//[✅] On loading destination display placeholder view
+//[ ] On successful load, display destinations
+
 class DestinationsRecentsTests: XCTestCase {
     // MARK: - PERSIST DESTINATION FEATURE
     
@@ -164,6 +168,15 @@ class DestinationsRecentsTests: XCTestCase {
         
         XCTAssertNil(sut.selectedDestination)
     }
+  
+    // MARK: - LOAD DESTINATION PLACEHOLDER FEATURE
+    
+    func test_init_displayPlaceholderView() {
+        let (sut, _) = makeSUT()
+        
+        XCTAssertTrue(sut.isLoadingDestinations)
+    }
+
     
     // MARK: Helpers
     

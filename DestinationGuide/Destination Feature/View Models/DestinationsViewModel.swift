@@ -30,6 +30,7 @@ class DestinationsViewModel: ObservableObject {
     var destinationDetails: DestinationDetailsSwiftUI?
     @Published var isDisplayDetailsView = false
     @Published var isDisplayDestinationDetailsLoader = false
+    @Published var isLoadingDestinations = false
     @Published var error: String?
     
     private func resetSelectedDestination() {
@@ -60,7 +61,12 @@ class DestinationsViewModel: ObservableObject {
         }
     }
     
+    private func displayDestinationPlaceholder() {
+        isLoadingDestinations = true
+    }
+    
     func getDestinations() {
+        displayDestinationPlaceholder()
         service.getDestinations { destinations in
             DispatchQueue.main.async {
                 self.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
