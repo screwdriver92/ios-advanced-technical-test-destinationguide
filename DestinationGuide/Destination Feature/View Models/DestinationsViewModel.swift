@@ -21,7 +21,9 @@ class DestinationsViewModel: ObservableObject {
         didSet {
             addToRecentSection(selectedDestination)
             if let destinationId = selectedDestination?.id {
-                getDestinationDetails(with: destinationId) {}
+                getDestinationDetails(with: destinationId) { [weak self] in
+                    self?.resetSelectedDestination()
+                }
             }
         }
     }
@@ -29,6 +31,10 @@ class DestinationsViewModel: ObservableObject {
     @Published var isDisplayDetailsView = false
     @Published var isDisplayDestinationDetailsLoader = false
     @Published var error: String?
+    
+    private func resetSelectedDestination() {
+        selectedDestination = nil
+    }
     
     private var service: DestinationFetchingService
     var store: DestinationStore
@@ -83,11 +89,13 @@ class DestinationsViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case let .success(details):
-                    self?.displayDetailsViewIfNeeded()
+                    self?.isDisplayDetailsView = true
                     self?.destinationDetails = details
                 case let .failure(error):
                     self?.error = error.localizedDescription
                 }
+                
+                self?.resetSelectedDestination()
                 completion()
             }
         }
@@ -108,11 +116,7 @@ class DestinationsViewModel: ObservableObject {
 //    }
 
     // MARK: - Helpers
-    
-    private func displayDetailsViewIfNeeded() {
-        isDisplayDetailsView = selectedDestination == nil ? false : true
-    }
-    
+        
     private func addToRecentSection(_ destination: Destination?) {
         if let destination = destination {
             guard !recentsDestinations.contains(destination) else { return }

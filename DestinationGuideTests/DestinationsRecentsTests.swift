@@ -25,7 +25,7 @@ import SwiftUI
 //[✅] If no destination selected hide the loader
 //[✅] If destination selected display the loader
 //[✅] If loader is visible it's not possible to select an other destination
-//[ ] On destination details push, reset the selected destination
+//[✅] On destination details completion, reset the selected destination
 
 class DestinationsRecentsTests: XCTestCase {
     // MARK: - PERSIST DESTINATION FEATURE
@@ -99,13 +99,7 @@ class DestinationsRecentsTests: XCTestCase {
         XCTAssertFalse(sut.isDisplayDetailsView, "Precondition - the selected destination is nil on init, nothing to display")
                 
         sut.updateSelectedDestination(with: selectedDestination)
-
-        let exp = XCTestExpectation(description: "Expected the request to complete")
-        sut.getDestinationDetails(with: selectedDestination.id) {
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 10)
+        wait(sut, toCompleteDestinationDetailsWith: selectedDestination)
         
         XCTAssertTrue(sut.isDisplayDetailsView, "Expected to display destination details view on destination selection")
         XCTAssertEqual(sut.destinationDetails, expectedDestinationDetails, "Expected to get a destination details view to display on destination selection")
@@ -159,6 +153,16 @@ class DestinationsRecentsTests: XCTestCase {
         sut.updateSelectedDestination(with: otherDestination)
         
         XCTAssertEqual(sut.selectedDestination, selectedDestination)
+    }
+    
+    func test_selectedDestination_resetSelectedDestinationOnDestinationDetailsCompletion() {
+        let selectedDestination = anyDestination(id: "1")
+        let (sut, _) = makeSUT()
+        
+        sut.updateSelectedDestination(with: selectedDestination)
+        wait(sut, toCompleteDestinationDetailsWith: selectedDestination)
+        
+        XCTAssertNil(sut.selectedDestination)
     }
     
     // MARK: Helpers
