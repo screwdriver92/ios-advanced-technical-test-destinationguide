@@ -32,12 +32,17 @@ struct DestinationsView: View {
             }
             VStack(alignment: .leading, spacing: 16) {
               DestinationHeader(text: viewModel.headerDestinationsText())
-              DestinationsList(
-                destinations: viewModel.destinations,
-                onDestinationTap: { destination in
-                  viewModel.updateSelectedDestination(with: destination)
-                })
-            }
+              if viewModel.isLoadingDestinations {
+                DestinationPlaceholderList()
+              } else {
+                DestinationsList(
+                  destinations: viewModel.destinations,
+                  onDestinationTap: { destination in
+                    viewModel.updateSelectedDestination(with: destination)
+                  })
+                .transition(.opacity)
+              }
+        }
           }
           if let details = viewModel.destinationDetails {
             NavigationLink(destination: DestinationDetailsView(viewModel: .init(details: details)),
