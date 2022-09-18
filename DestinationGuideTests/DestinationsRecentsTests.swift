@@ -29,7 +29,7 @@ import SwiftUI
 
 // LOAD DESTINATION PLACEHOLDER FEATURE
 //[✅] On loading destination display placeholder view
-//[ ] On successful load, display destinations
+//[✅] On successful load, display destinations
 
 class DestinationsRecentsTests: XCTestCase {
     // MARK: - PERSIST DESTINATION FEATURE
@@ -176,7 +176,14 @@ class DestinationsRecentsTests: XCTestCase {
         
         XCTAssertTrue(sut.isLoadingDestinations)
     }
+    
+    func test_getDestinations_displayDestinationsOnCompletion() {
+        let (sut, _) = makeSUT()
 
+        waitToCompleteDestinationLoading(for: sut)
+        
+        XCTAssertFalse(sut.isLoadingDestinations)
+    }
     
     // MARK: Helpers
     
@@ -189,6 +196,15 @@ class DestinationsRecentsTests: XCTestCase {
     private func wait(_ sut: DestinationsViewModel, toCompleteDestinationDetailsWith destination: Destination) {
         let exp = XCTestExpectation(description: "Expect that the get destination details completes")
         sut.getDestinationDetails(with: destination.id) {
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 10)
+        return
+    }
+    
+    private func waitToCompleteDestinationLoading(for sut: DestinationsViewModel) {
+        let exp = XCTestExpectation(description: "Expect that the get destination completes")
+        sut.getDestinations {
             exp.fulfill()
         }
         wait(for: [exp], timeout: 10)

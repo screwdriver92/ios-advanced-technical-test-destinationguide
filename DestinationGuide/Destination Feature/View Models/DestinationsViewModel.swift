@@ -44,7 +44,7 @@ class DestinationsViewModel: ObservableObject {
     init(service: DestinationFetchingService, store: DestinationStore) {
         self.service = service
         self.store = store
-        getDestinations()
+        getDestinations { }
         recentsDestinations = store.getDestinations()
         
         $recentsDestinations
@@ -60,16 +60,15 @@ class DestinationsViewModel: ObservableObject {
             selectedDestination = destination
         }
     }
-    
-    private func displayDestinationPlaceholder() {
-        isLoadingDestinations = true
-    }
-    
-    func getDestinations() {
+        
+    func getDestinations(completion: @escaping () -> Void) {
         displayDestinationPlaceholder()
-        service.getDestinations { destinations in
+        
+        service.getDestinations { [weak self] destinations in
             DispatchQueue.main.async {
-                self.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+                self?.hideDestinationPlaceholder()
+                self?.destinations = Array(try! destinations.get()).sorted(by: { $0.name < $1.name })
+                completion()
             }
         }
     }
@@ -146,6 +145,14 @@ class DestinationsViewModel: ObservableObject {
     
     private func hideDestinationDetailsLoader() {
         isDisplayDestinationDetailsLoader = false
+    }
+
+    private func displayDestinationPlaceholder() {
+        isLoadingDestinations = true
+    }
+    
+    private func hideDestinationPlaceholder() {
+        isLoadingDestinations = false
     }
     
     // UIKT

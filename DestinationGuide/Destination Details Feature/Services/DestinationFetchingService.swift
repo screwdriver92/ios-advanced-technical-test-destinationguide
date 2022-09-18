@@ -18,8 +18,8 @@ protocol DestinationFetchingServiceProtocol {
 
 class DestinationFetchingService : DestinationFetchingServiceProtocol {
     func getDestinations(completion: @escaping (Result<Set<Destination>, DestinationFetchingServiceError>) -> ()) {
-        let extraSeconds = Double.random(in: 1..<5)
-        DispatchQueue.global().asyncAfter(deadline: .now() + extraSeconds) {
+        let extraMilliseconds = Int.random(in: 500..<750)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(extraMilliseconds)) {
             completion(.success(destinationsStub))
         }
     }
