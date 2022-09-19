@@ -14,11 +14,12 @@ struct DestinationsView: View {
     NavigationView {
       ZStack {
         ScrollView(showsIndicators: false) {
-          Text("Delete UserDefaults")
-            .onTapGesture {
-              viewModel.recentsDestinations = []
-              viewModel.store.deleteDestination()
-            }
+          Button(action: {
+            viewModel.recentsDestinations = []
+            viewModel.store.deleteDestination()
+          }, label: {
+            Text("-DEBUG BUTTON- Delete UserDefaults")
+          })
           VStack(alignment: .leading, spacing: 54) {
             if viewModel.isDisplayRecentSection {
               VStack(alignment: .leading, spacing: 12) {
